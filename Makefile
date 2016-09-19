@@ -1,4 +1,4 @@
-install: install-zsh install-bash install-pythonrc install-bin install-git install-emacs
+install: install-zsh install-bash install-pythonrc install-bin install-git install-emacs install-tmux
 
 install-git:
 	ln -fs `pwd`/git/gitconfig ~/.gitconfig
@@ -12,6 +12,9 @@ install-bash:
 	ln -fs `pwd`/bash/bashrc ~/.bash_profile
 	ln -fs ~/.bash_profile ~/.bashrc
 	@echo "Old .bash_profile saved as .bash_profile.old"
+
+install-tmux:
+	ln -fs `pwd`/tmux/tmux.conf ~/.tmux.conf
 
 install-pythonrc:
 	ln -fs `pwd`/python/pythonrc.py ~/.pythonrc.py
