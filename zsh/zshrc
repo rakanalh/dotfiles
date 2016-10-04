@@ -49,7 +49,7 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git, docker, brew, gradle, httpie, pyenv, pip, python, vagrant, zsh-autosuggestions)
+plugins=(git, docker, brew, gradle, httpie, pyenv, pip, python, vagrant, tmux, zsh-autosuggestions)
 
 # User configuration
 
@@ -117,7 +117,7 @@ alias docker-remove-all="docker rm \$(docker ps -a -q)"
 alias docker-update-all="docker images | awk '{print $1}' | xargs -L1 docker pull"
 
 alias e="emacsclient -t -a ''"
-alias emacsbare="emacs -Q --eval \"(load-theme 'wombat)\n(setq backup-inhibited t)\n(setq auto-save-default nil)\""
+alias emacsbare="emacs -nw -Q --eval \"(load-theme 'wombat)\""
 alias eb="emacsbare"
 alias ec="e"
 alias vim="eb"
