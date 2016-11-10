@@ -43,8 +43,8 @@
   pager = less -R
 
 [push]
-  default = matching
+  default = current
 [branch]
-	autosetuprebase = always
+  autosetuprebase = always
 [help]
-	autocorrect = 1
+  autocorrect = 1
