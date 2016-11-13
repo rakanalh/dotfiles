@@ -106,6 +106,9 @@ export PYTHONDONTWRITEBYTECODE=1
 export PYTHONSTARTUP="$HOME/.pythonrc.py"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
+# Other
+export DISABLE_AUTO_TITLE='true'
+
 alias ls='ls --color=auto'
 
 alias emacs="/usr/local/bin/emacs"
@@ -150,6 +153,10 @@ function lastcommandfailed() {
 function cleanpycs() {
   find . -name "*.pyc" -exec rm -rf {} \;
 }
+
+autoload bashcompinit
+bashcompinit
+eval "$(_TMUXP_COMPLETE=source tmuxp)"
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.oh-my-zsh/plugins/zsh-autosuggestions
