@@ -1,4 +1,4 @@
-install: install-zsh install-bash install-pythonrc install-bin install-git install-emacs install-tmux
+install: install-zsh install-bash install-pythonrc install-bin install-git install-emacs install-tmux install-karabiner install-hammerspoon
 
 install-git:
 	ln -fs `pwd`/git/gitconfig ~/.gitconfig
@@ -29,3 +29,9 @@ install-zsh:
 install-emacs:
 	mkdir -p ~/.emacs.d
 	git clone -q git://github.com/rakanalh/dotemacs ~/.emacs.d/ || true
+
+install-karabiner:
+	ln -fs `pwd`/karabiner/karabiner.json ~/.karabiner.d/configuration/karabiner.json
+
+install-hammerspoon:
+	ln -fs `pwd`/hammerspoon/init.lua ~/.hammerspoon/init.lua
