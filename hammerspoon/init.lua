@@ -3,10 +3,15 @@ local window = require 'hs.window'
 -- A global variable for the Hyper Mode
 k = hs.hotkey.modal.new({}, "F17")
 
-k:bind({}, "W", nil, function()
-  hs.notify.new({title="Hammerspoon", informativeText="Hello World"}):send()
+-- Expand / Maximize
+k:bind({}, "E", nil, function()
+    local win = window.focusedWindow()
+    if win ~= nil then
+       win:maximize()
+    end
 end)
 
+-- FullScreen
 k:bind({}, "F", nil, function()
     local win = window.focusedWindow()
     if win ~= nil then
@@ -14,6 +19,7 @@ k:bind({}, "F", nil, function()
     end
 end)
 
+-- Take Left Half
 k:bind({}, "Left", nil, function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
@@ -27,6 +33,7 @@ k:bind({}, "Left", nil, function()
   win:setFrame(f)
 end)
 
+-- Take right Half
 k:bind({}, "Right", nil, function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
@@ -39,6 +46,12 @@ k:bind({}, "Right", nil, function()
   f.h = max.h
   win:setFrame(f)
 end)
+
+k:bind({}, "N", nil, function()
+  local win = hs.window.focusedWindow()
+  win:moveOnScreenEast()
+end)
+  
 
 k:bind({}, "R", nil, function()
   hs.reload()
