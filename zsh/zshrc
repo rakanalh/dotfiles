@@ -86,6 +86,7 @@ export LC_ALL=en_US.UTF-8
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export TERM=xterm-256color
+
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 
 export IGNOREEOF=1
@@ -93,8 +94,9 @@ export LESS=FRSX
 
 export EDITOR=emacs
 export PYOPEN_CMD=emacs
-export GIT_EDITOR=$EDITOR
+export GIT_EDITOR="${EDITOR} -nw -Q"
 
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export ANDROID_HOME=/Users/rakan/Library/Android/sdk/
 export PROJECT_HOME=$HOME/Code/Python/
 export GOPATH=$HOME/Code/Go
