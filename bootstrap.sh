@@ -3,9 +3,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 
 brew tap caskroom/cask
 
-brew cask install google-chrome google-drive slack skype alfred iterm2 virtualbox vagrant karabiner-elements hammerspoon istat-menus vmware-fusion dropbox
+brew cask install google-chrome google-drive slack skype alfred iterm2 virtualbox vagrant karabiner-elements hammerspoon istat-menus vmware-fusion dropbox keepassx java
 brew install tmux coreutils automake zsh-syntax-highlighting zsh-autosuggestions jq ag awscli
-brew install pyenv pyenv-virtualenv golang
+brew install pyenv pyenv-virtualenv golang gradle
 
 sudo easy_install pip
 sudo pip install tmuxp
