@@ -99,7 +99,7 @@ export ANDROID_HOME=/Users/rakan/Library/Android/sdk/
 export PROJECT_HOME=$HOME/Code/Python/
 export GOPATH=$HOME/Code/Go
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/go/bin:/opt/sm/bin:/opt/sm/pkg/active/bin:/opt/sm/pkg/active/sbin:{$ANDROID_HOME}platform-tools/:$GOROOT/bin:$GOPATH/bin:~/.bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/go/bin:/opt/sm/bin:/opt/sm/pkg/active/bin:/opt/sm/pkg/active/sbin:${ANDROID_HOME}platform-tools/:$GOROOT/bin:$GOPATH/bin:~/.bin"
 
 # python
 export PYTHONDONTWRITEBYTECODE=1
