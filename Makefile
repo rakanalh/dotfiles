@@ -31,7 +31,9 @@ install-emacs:
 	git clone -q git://github.com/rakanalh/dotemacs ~/.emacs.d/ || true
 
 install-karabiner:
+	mkdir -p ~/.karabiner.d/configuration/
 	ln -fs `pwd`/karabiner/karabiner.json ~/.karabiner.d/configuration/karabiner.json
 
 install-hammerspoon:
+	mkdir ~/.hammerspoon
 	ln -fs `pwd`/hammerspoon/init.lua ~/.hammerspoon/init.lua
