@@ -1,10 +1,9 @@
 local window = require 'hs.window'
 
--- A global variable for the Hyper Mode
-k = hs.hotkey.modal.new({}, "F17")
+hyper = {"ctrl", "alt"}
 
 -- Expand / Maximize
-k:bind({}, "E", nil, function()
+hs.hotkey.bind(hyper, "E", nil, function()
     local win = window.focusedWindow()
     if win ~= nil then
        win:maximize()
@@ -12,7 +11,7 @@ k:bind({}, "E", nil, function()
 end)
 
 -- FullScreen
-k:bind({}, "F", nil, function()
+hs.hotkey.bind(hyper, "f", nil, function()
     local win = window.focusedWindow()
     if win ~= nil then
         win:setFullScreen(not win:isFullScreen())
@@ -20,7 +19,7 @@ k:bind({}, "F", nil, function()
 end)
 
 -- Take Left Half
-k:bind({}, "Left", nil, function()
+hs.hotkey.bind(hyper, "j", nil, function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -34,7 +33,7 @@ k:bind({}, "Left", nil, function()
 end)
 
 -- Take right Half
-k:bind({}, "Right", nil, function()
+hs.hotkey.bind(hyper, "l", nil, function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -47,28 +46,18 @@ k:bind({}, "Right", nil, function()
   win:setFrame(f)
 end)
 
-k:bind({}, "N", nil, function()
+hs.hotkey.bind({"ctrl", "alt", "shift"}, "l", nil, function()
   local win = hs.window.focusedWindow()
-  win:moveOnScreenEast()
+  win:moveOneScreenEast()
 end)
-  
 
-k:bind({}, "R", nil, function()
+hs.hotkey.bind({"ctrl", "alt", "shift"}, "j", nil, function()
+  local win = hs.window.focusedWindow()
+  win:moveOneScreenWest()
+end)
+
+
+hs.hotkey.bind(hyper, "R", nil, function()
   hs.reload()
 end)
 hs.alert.show("Config loaded")
-
--- Enter Hyper Mode when F18 (Hyper/Capslock) is pressed
-pressedF18 = function()
-  k.triggered = false
-  k:enter()
-end
-
--- Leave Hyper Mode when F18 (Hyper/Capslock) is pressed,
---   send ESCAPE if no other keys are pressed.
-releasedF18 = function()
-  k:exit()
-end
-
--- Bind the Hyper key
-f18 = hs.hotkey.bind({}, 'F18', pressedF18, releasedF18)
