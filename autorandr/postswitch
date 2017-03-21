@@ -1,0 +1,4 @@
+#!/bin/bash
+killall -9 polybar
+MONITOR=eDP-1 polybar Bar &
+MONITOR=HDMI-1 polybar Bar &
