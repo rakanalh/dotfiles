@@ -1,3 +1,4 @@
+URxvt.iso14755 : false
 Xft.dpi: 96
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
@@ -11,9 +12,12 @@ URxvt.font: xft:Hack:style=Book:antialias=true:size=12, \
             xft:WenQuanYi Bitmap Song:size=12, \
             xft:unifont:style=Medium:antialias=false, \
             xft:FreeSerif:style=Regular
-URxvt*background:                     #151718
-URxvt*foreground:                     #d6d6d6
-URxvt*cursorColor:                    #d6d6d6
+URxvt*background: #151718
+URxvt*foreground: #d6d6d6
+URxvt*cursorColor: #d6d6d6
+URxvt.perl-ext-common:  default,clipboard
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 
 ! Dracula Xresources palette
 *.foreground: #F8F8F2
@@ -68,3 +72,6 @@ rofi.width: 50
 rofi.font: System San Francisco Display 13
 rofi.lines: 15
 rofi.fixed-num-lines: true
+
+Emacs.FontBackend: xft,x
+Emacs.font: Hack-12

@@ -16,10 +16,11 @@ green = #aec795
 
 
 [bar/Bar]
-monitor = ${env:MONITOR}
+;monitor = ${env:MONITOR}
+monitor-strict = false
+override-redirect = false
+
 bottom = false
-dock = false
-wm-restack = i3
 width = 100%
 height = 28
 
@@ -31,7 +32,7 @@ padding-right = 3
 module-margin-right = 1
 module-margin-left = 1
 
-modules-right = updates volume vpncheck wlan cpu memory filesystem battery date menu0
+modules-right = updates volume xkblayout vpncheck wlan cpu memory filesystem battery date menu0
 modules-center = xwindow
 modules-left = i3 mpd
 
@@ -51,6 +52,18 @@ font-0 = terminus:size=8;0
 font-1 = FontAwesome:size=14;0
 font-2 = TakaoGothic:weight=bold:size=10;0
 font-3 = FontAwesome:size=8;0
+
+[bar/eDP-1]
+inherit = bar/Bar
+monitor = eDP-1
+
+[bar/DP-1-1]
+inherit = bar/Bar
+monitor = DP-1-1
+
+[bar/HDMI-1]
+inherit = bar/Bar
+monitor = HDMI-1
 
 [module/xwindow]
 type = internal/xwindow
@@ -84,24 +97,20 @@ label-unfocused-font = 1
 label-urgent-font = 1
 label-visible-font = 1
 
-;label-focused = 
 ;label-focused = %index%
 label-focused-foreground = ${colors.white}
 label-focused-padding = 2
 
-; label-unfocused = 
 ;label-unfocused = %index%
 label-unfocused-padding = 2
 label-unfocused-foreground = ${colors.gray}
 ;label-unfocused-underline = ${colors.white}
 
-; label-urgent = 
 ;label-urgent = %index%!
 ;label-urgent-background = ${colors.red}
 label-urgent-padding = 2
 label-urgent-foreground = ${colors.red}
 
-; label-visible = 
 ;label-visible = %index%
 label-visible-foreground = ${colors.white}
 label-visible-padding = 2
@@ -109,8 +118,9 @@ label-visible-padding = 2
 
 ws-icon-0 = 1;
 ws-icon-1 = 2;
-ws-icon-2 = 3;
+ws-icon-2 = 3;
 ws-icon-3 = 4;
+ws-icon-4 = 5;
 
 
 [module/backlight]
@@ -170,7 +180,7 @@ format-connected-padding = 1
 format-disconnected-padding = 1
 
 format-connected = <label-connected>
-format-connected-underline = ${colors.white}
+format-connected-underline = #268bd2
 format-disconnected-underline = ${colors.gray}
 
 label-connected = %essid%
@@ -191,9 +201,9 @@ format-padding = 1
 
 [module/volume]
 type = internal/volume
-master-soundcard = hw:0
-speaker-soundcard = hw:0
-headphone-soundcard = hw:0
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
 
 format-volume = <bar-volume>
 
@@ -324,14 +334,22 @@ menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
+[module/xkblayout]
+type = custom/script
+exec = xkblayout-state print "%s %v"
+interval = 2
+format-underline = #ff0000
+format-prefix = ""
+format-prefix-foreground = #fff
+
 [module/vpncheck]
 type = custom/script
 exec = pgrep openvpn
 interval = 5
 label = vpn
-format-underline = #268bd2
+format-underline = ${colors.green}
 format-prefix = " "
-format-prefix-foreground = #5b
+format-prefix-foreground = ${colors.white}
 
 [module/mpd]
 type = internal/mpd
