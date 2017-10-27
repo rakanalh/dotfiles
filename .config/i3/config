@@ -27,12 +27,20 @@ font pango:System San Francisco Display 13
 # font, it doesn’t scale on retina/hidpi displays.
 
 new_window 1pixel
+new_float pixel 1
+hide_edge_borders smart
+for_window [title=".*"] title_format "<span></span>"
+font pango:Fira 0
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# Quickly switch between workspaces
+bindsym $mod+Tab workspace back_and_forth
+
 # start a terminal
 bindsym $mod+t exec urxvt
+bindsym $mod+p exec roficlip
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -93,17 +101,25 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+bindsym $mod+shift+bracketright workspace next
+bindsym $mod+shift+bracketleft workspace prev
+
 # Workspaces
 set $workspace1 1
 set $workspace2 2
 set $workspace3 3
+set $workspace4 4
+set $workspace5 5
+
+workspace $workspace2 output HDMI-1
+workspace $workspace3 output HDMI-1
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
@@ -114,8 +130,8 @@ bindsym $mod+0 workspace 10
 bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
@@ -124,11 +140,19 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # Assign apps to workspaces
 assign [class="Google-chrome"] $workspace1
-assign [class="Emacs"] $workspace2
+assign [class="Firefox"] $workspace1
+assign [class="Emacs"] $workspace3
+assign [class="Zeal"] $workspace3
 assign [class="URxvt"] $workspace2
-assign [class="Terminator"] $workspace2
-assign [class="Slack"] $workspace3
+# assign [class="Terminator"] $workspace2
+assign [class="Slack"] $workspace5
 
+# Open specific applications in floating mode
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [title="Nautilus"] floating enable border pixel 1
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="(?i)virtualbox"] floating enable border normal
+for_window [window_role="pop-up"] floating enable
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -159,8 +183,18 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
 bindsym $mod+r mode "resize"
+
+mode "music" {
+     bindsym l exec mpc next
+     bindsym j exec mpc prev
+     bindsym p exec mpc pause; mode "default"
+     bindsym r exec mpc play; mode "default"
+     # back to normal: Enter or Escape
+     bindsym Return mode "default"
+     bindsym Escape mode "default"
+}
+bindsym $mod+m mode "music"
 
 set $bg-color 	         #2f343f
 set $inactive-bg-color   #2f343f
@@ -168,12 +202,18 @@ set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
+client.focused              $bgcolor #268bd2 #ffffff #ffffff
+client.unfocused            $inactive-bg-color #262822 #000000 #000000
+client.urgent               #000000 #000000 #000000 #000000
+client.focused_inactive     #000000 #000000 #000000 #000000
+client.background           #ffffff
+
 # window colors
 #                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          #00ff00
-client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+# client.focused          $bg-color           $bg-color          $text-color          #00ff00
+# client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
+# client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
+# client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
 
 # Hide border at the end of windows indicating where the next tiling is
 hide_edge_borders both
@@ -197,16 +237,17 @@ bindsym $mod+Return exec rofi -show run
 #-lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -color-window "$bg-color" "$text-color" -color-active "$bg-color" "#9575cd" -color-normal "$inactive-bg-color" "$text-color" -font "System San Francisco Display 18"
 
 # Lock Screen
-bindsym $mod+shift+x exec sh ~/.config/i3/lock.sh
+bindsym $mod+shift+x exec sh /home/rakan/Code/i3lock-fancy/lock
+# ~/.config/i3/lock.sh
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pulseaudio-ctl mute # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness=0
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec light -A 10 # increase screen brightness=0
+bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec ~/.config/i3/touchpad.sh # toggle touchpad
@@ -217,20 +258,83 @@ bindsym XF86AudioPause exec mpc pause
 bindsym XF86AudioNext exec mpc next
 bindsym XF86AudioPrev exec mpc prev
 
+bindsym XF86Search exec rofi -show run
+
 # Resolution
 # exec sh ~/.screenlayout/laptop.sh
 exec autorandr --change
 
-# Wallpaper
-exec_always feh --bg-scale ~/Pictures/wallpaper_1920x1080.jpg
+# Keyboard
+exec setxkbmap -layout us,ara -variant ,mac -option grp:alt_space_toggle
 
 # Transparency
-exec compton -f
+# exec compton -f
 
 # Apps
 exec google-chrome-stable
 exec emacs
-exec terminator
+exec zeal
+exec --no-startup-id i3-msg 'workspace 2; exec urxvt'
+exec --no-startup-id i3-msg 'workspace 3; exec urxvt -e tmuxp load ~/.tmuxp/newstore.yaml'
+exec --no-startup-id i3-msg 'workspace 4; exec urxvt -e ncmpcpp'
 exec slack
-exec dunst &
 exec mpd
+exec clipster -d &
+exec srandrd ~/.config/polybar/postswitch
+
+#############################
+### settings for i3-gaps: ###
+#############################
+
+# Set inner/outer gaps
+gaps inner 10
+gaps outer -4
+
+# Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
+# gaps inner|outer current|all set|plus|minus <px>
+# gaps inner all set 10
+# gaps outer all plus 5
+
+# Smart gaps (gaps used if only more than one container on the workspace)
+smart_gaps on
+
+# Smart borders (draw borders around container only if it is not the only container on this workspace)
+# on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
+smart_borders on
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
