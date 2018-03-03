@@ -271,7 +271,7 @@ exec setxkbmap -layout us,ara -variant ,mac -option grp:alt_space_toggle
 # exec compton -f
 
 # Apps
-exec google-chrome-stable
+exec firefox
 exec emacs
 exec zeal
 exec --no-startup-id i3-msg 'workspace 2; exec urxvt'

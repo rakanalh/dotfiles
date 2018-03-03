@@ -32,7 +32,7 @@ padding-right = 3
 module-margin-right = 1
 module-margin-left = 1
 
-modules-right = updates volume xkblayout vpncheck wlan cpu memory filesystem battery date menu0
+modules-right = crypto updates volume xkblayout vpncheck wlan battery date menu0
 modules-center = xwindow
 modules-left = i3 mpd
 
@@ -52,14 +52,20 @@ font-0 = terminus:size=8;0
 font-1 = FontAwesome:size=14;0
 font-2 = TakaoGothic:weight=bold:size=10;0
 font-3 = FontAwesome:size=8;0
+font-4 = cryptocoins:style=Regular;0
+font-5 = "Font Awesome 5 Brands:pixelsize=16;1"
 
 [bar/eDP-1]
 inherit = bar/Bar
 monitor = eDP-1
 
-[bar/DP-1-1]
+[bar/DP-2]
 inherit = bar/Bar
-monitor = DP-1-1
+monitor = DP-2
+
+[bar/DP-1-2]
+inherit = bar/Bar
+monitor = DP-1-2
 
 [bar/HDMI-1]
 inherit = bar/Bar
@@ -191,7 +197,7 @@ label-disconnected-foreground = ${colors.gray}
 [module/date]
 type = internal/date
 date-alt =   %A %H:%M
-date =   %b/%d/%y %H:%M
+date =   %A %b/%d/%y %H:%M
 interval = 5
 format-underline = ${colors.white}
 ;format-background = ${colors.black}
@@ -382,5 +388,11 @@ icon-repeat = R
 
 toggle-on-foreground = #e60053
 toggle-off-foreground = #66
+
+
+[module/crypto]
+type = custom/script
+interval = 60
+exec = /home/rakan/.config/polybar/crypto.py
 
 ; vim:ft=dosini
