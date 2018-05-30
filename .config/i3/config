@@ -110,9 +110,12 @@ set $workspace2 2
 set $workspace3 3
 set $workspace4 4
 set $workspace5 5
+set $workspace6 6
+set $workspace7 7
+set $workspace8 8
+set $workspace9 9
+set $workspace10 10
 
-workspace $workspace2 output HDMI-1
-workspace $workspace3 output HDMI-1
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -120,11 +123,11 @@ bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
 bindsym $mod+4 workspace $workspace4
 bindsym $mod+5 workspace $workspace5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
@@ -132,11 +135,11 @@ bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
 bindsym $mod+Shift+4 move container to workspace $workspace4
 bindsym $mod+Shift+5 move container to workspace $workspace5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
 
 # Assign apps to workspaces
 assign [class="Google-chrome"] $workspace1
@@ -237,7 +240,7 @@ bindsym $mod+Return exec rofi -show run
 #-lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -color-window "$bg-color" "$text-color" -color-active "$bg-color" "#9575cd" -color-normal "$inactive-bg-color" "$text-color" -font "System San Francisco Display 18"
 
 # Lock Screen
-bindsym $mod+shift+x exec sh /home/rakan/Code/i3lock-fancy/lock
+bindsym $mod+shift+x exec /usr/bin/i3lock-fancy
 # ~/.config/i3/lock.sh
 
 # Pulse Audio controls
@@ -273,7 +276,7 @@ exec setxkbmap -layout us,ara -variant ,mac -option grp:alt_space_toggle
 # Apps
 exec firefox
 exec emacs
-exec zeal
+# exec zeal
 exec --no-startup-id i3-msg 'workspace 2; exec urxvt'
 exec --no-startup-id i3-msg 'workspace 3; exec urxvt -e tmuxp load ~/.tmuxp/newstore.yaml'
 exec --no-startup-id i3-msg 'workspace 4; exec urxvt -e ncmpcpp'

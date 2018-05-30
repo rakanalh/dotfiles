@@ -88,7 +88,7 @@ export LC_ALL=en_US.UTF-8
 
 export TERM=xterm-256color
 
-export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
+# export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 
 export IGNOREEOF=1
 export LESS=FRSX
@@ -97,8 +97,8 @@ export EDITOR=emacs
 export PYOPEN_CMD=emacs
 export GIT_EDITOR="${EDITOR} -nw -Q"
 
-export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-export ANDROID_HOME=/Users/rakan/Library/Android/sdk/
+export JAVA_HOME="/usr/lib/jvm/default"
+#export ANDROID_HOME=/home/rakan/Library/Android/sdk/
 export PROJECT_HOME=$HOME/Code/Python/
 export GOPATH=$HOME/Code/Go
 
@@ -114,7 +114,7 @@ export DISABLE_AUTO_TITLE='true'
 
 alias ls='ls --color=auto'
 
-alias emacs="/usr/local/bin/emacs"
+alias emacs="/usr/bin/emacs"
 alias ip1="ipconfig getifaddr en0"
 alias ip2="ipconfig getifaddr en1"
 
@@ -157,15 +157,8 @@ function cleanpycs() {
   find . -name "*.pyc" -exec rm -rf {} \;
 }
 
-autoload bashcompinit
-bashcompinit
-eval "$(_TMUXP_COMPLETE=source tmuxp)"
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.oh-my-zsh/plugins/zsh-autosuggestions
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-source ~/.iterm2_shell_integration.`basename $SHELL`
-
+source /etc/profile.d/autojump.zsh
 source ~/.zshrc.work

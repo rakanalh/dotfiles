@@ -32,7 +32,7 @@ padding-right = 3
 module-margin-right = 1
 module-margin-left = 1
 
-modules-right = crypto updates volume xkblayout vpncheck wlan battery date menu0
+modules-right = crypto updates xkblayout vpncheck volume wlan battery date menu0
 modules-center = xwindow
 modules-left = i3 mpd
 
@@ -63,9 +63,9 @@ monitor = eDP-1
 inherit = bar/Bar
 monitor = DP-2
 
-[bar/DP-1-2]
+[bar/DP-1-1]
 inherit = bar/Bar
-monitor = DP-1-2
+monitor = DP-1-1
 
 [bar/HDMI-1]
 inherit = bar/Bar
@@ -127,6 +127,11 @@ ws-icon-1 = 2;
 ws-icon-2 = 3;
 ws-icon-3 = 4;
 ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
 
 
 [module/backlight]
@@ -207,34 +212,49 @@ format-padding = 1
 
 [module/volume]
 type = internal/volume
+
+; Soundcard to be used
+; Usually in the format hw:#
 master-soundcard = default
 speaker-soundcard = default
 headphone-soundcard = default
 
-format-volume = <bar-volume>
+label-volume-font = 1
+format-volume-underline = ${colors.yellow}
 
-label-volume = VOL
-label-volume-foreground = ${root.foreground}
+format-volume = <ramp-volume> <label-volume>
+format-muted = <ramp-volume> <label-muted>
+label-volume = %percentage%
 
-label-muted =  sound muted
-label-muted-foreground = ${colors.gray}
+label-muted = 🔇 muted
+label-muted-foreground = #aaa
 
-bar-volume-width = 10
-bar-volume-foreground-0 = ${colors.green}
-bar-volume-foreground-1 = ${colors.green}
-bar-volume-foreground-2 = ${colors.green}
-bar-volume-foreground-3 = ${colors.green}
-bar-volume-foreground-4 = ${colors.yellow}
-bar-volume-foreground-5 = ${colors.red}
-bar-volume-gradient = false
-bar-volume-indicator = 
-bar-volume-indicator-font = 4
-bar-volume-indicator-foreground = ${colors.white}
-bar-volume-fill = 
-bar-volume-fill-font = 4
-bar-volume-empty = 
-bar-volume-empty-font = 4
-bar-volume-empty-foreground = ${colors.gray}
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+; label-volume = VOL
+; label-volume-foreground = ${root.foreground}
+
+; label-muted =  sound muted
+; label-muted-foreground = ${colors.gray}
+
+; bar-volume-width = 10
+; bar-volume-foreground-0 = ${colors.green}
+; bar-volume-foreground-1 = ${colors.green}
+; bar-volume-foreground-2 = ${colors.green}
+; bar-volume-foreground-3 = ${colors.green}
+; bar-volume-foreground-4 = ${colors.yellow}
+; bar-volume-foreground-5 = ${colors.red}
+; bar-volume-gradient = false
+; bar-volume-indicator = 
+; bar-volume-indicator-font = 4
+; bar-volume-indicator-foreground = ${colors.white}
+; bar-volume-fill = 
+; bar-volume-fill-font = 4
+; bar-volume-empty = 
+; bar-volume-empty-font = 4
+; bar-volume-empty-foreground = ${colors.gray}
 
 
 [module/battery]
