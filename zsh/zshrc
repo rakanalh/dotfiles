@@ -108,6 +108,8 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/us
 export PYTHONDONTWRITEBYTECODE=1
 export PYTHONSTARTUP="$HOME/.pythonrc.py"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
 
 # Other
 export DISABLE_AUTO_TITLE='true'
@@ -158,7 +160,6 @@ function cleanpycs() {
 }
 
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.oh-my-zsh/plugins/zsh-autosuggestions
-source /etc/profile.d/autojump.zsh
 source ~/.zshrc.work

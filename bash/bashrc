@@ -24,7 +24,6 @@ function lastcommandfailed() {
 export ARCHFLAGS='-arch i386 -arch x86_64'
 
 export TERM=xterm-color
-export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 
 export CLICOLOR=1
 if [ `uname` == "Darwin" ]; then
@@ -105,8 +104,9 @@ if [ `uname` == "Darwin" ]; then
   fi;
 fi;
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-
 eval "$(pyenv virtualenv-init -)"
 
 test -e ${HOME}/.iterm2_shell_integration.bash && source ${HOME}/.iterm2_shell_integration.bash

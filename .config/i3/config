@@ -263,6 +263,8 @@ bindsym XF86AudioPrev exec mpc prev
 
 bindsym XF86Search exec rofi -show run
 
+bindsym $mod+shift+p exec ~/.config/polybar/postswitch
+
 # Resolution
 # exec sh ~/.screenlayout/laptop.sh
 exec autorandr --change
@@ -278,12 +280,10 @@ exec firefox
 exec emacs
 # exec zeal
 exec --no-startup-id i3-msg 'workspace 2; exec urxvt'
-exec --no-startup-id i3-msg 'workspace 3; exec urxvt -e tmuxp load ~/.tmuxp/newstore.yaml'
 exec --no-startup-id i3-msg 'workspace 4; exec urxvt -e ncmpcpp'
 exec slack
 exec mpd
 exec clipster -d &
-exec srandrd ~/.config/polybar/postswitch
 
 #############################
 ### settings for i3-gaps: ###
