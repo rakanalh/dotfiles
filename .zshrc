@@ -6,12 +6,11 @@ export ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 
-ZSH_THEME="dracula"
+ZSH_THEME="iGeek"
 if [ "$INSIDE_EMACS" ]; then
-    ZSH_THEME="fishy"
+    ZSH_THEME="iGeek"
     PROMPT_EOL_MARK=''
 fi
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -50,7 +49,11 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git, docker, brew, gradle, httpie, pyenv, pip, python, vagrant, tmux, zsh-autosuggestions)
+plugins=(
+  git
+  autojump
+  zsh-autosuggestions
+)
 
 # User configuration
 
@@ -102,7 +105,7 @@ export JAVA_HOME="/usr/lib/jvm/default"
 export PROJECT_HOME=$HOME/Code/Python/
 export GOPATH=$HOME/Code/Go
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/go/bin:/opt/sm/bin:/opt/sm/pkg/active/bin:/opt/sm/pkg/active/sbin:${ANDROID_HOME}platform-tools/:$GOROOT/bin:$GOPATH/bin:~/.bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/go/bin:/opt/sm/bin:/opt/sm/pkg/active/bin:/opt/sm/pkg/active/sbin:${ANDROID_HOME}platform-tools/:$GOROOT/bin:$GOPATH/bin:~/.bin;~/.cargo/bin"
 
 # python
 export PYTHONDONTWRITEBYTECODE=1
@@ -130,6 +133,10 @@ alias eb="emacsbare"
 alias ec="e"
 alias vim="eb"
 alias vi="eb"
+
+alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
+
+alias backlight="dbus-send --system --type=method_call  --dest=\"org.freedesktop.UPower\" \"/org/freedesktop/UPower/KbdBacklight\" \"org.freedesktop.UPower.KbdBacklight.SetBrightness\" int32:$@"
 
 # setup the main ls alias if we've established common args
 alias ls="command ls -hBG"
@@ -161,5 +168,11 @@ function cleanpycs() {
 
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.oh-my-zsh/plugins/zsh-autosuggestions
-source ~/.zshrc.work
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+alias raiden-testnet='raiden --accept-disclaimer --keystore-path ~/.ethereum/testnet/keystore/ --log-config "raiden.raiden_service:DEBUG,raiden.blockchain_events_handler:DEBUG,raiden.network.proxies.token_network:DEBUG" $@'
+alias raiden-local='raiden --accept-disclaimer --network-id 4555 --keystore-path ../LocalGeth/data/keystore --registry-contract-address "0x90845Eb9bB31EE5C20e3776117BAb33582a4f823" --discovery-contract-address "0x4410bd7E4682a51358FCa06307470f987c0156d9" --secret-registry-contract-address "0x77487673F3dCE2810202b2c90613CdCb284c0103" --no-sync-check --log-config "raiden.raiden_service:DEBUG,raiden.blockchain_events_handler:DEBUG,raiden.network.proxies.token_network:DEBUG"y'
+
+alias cat="bat"
+# alias grep="rg"
+# alias find="fg"

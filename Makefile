@@ -1,4 +1,4 @@
-install: install-zsh install-bash install-pythonrc install-bin install-git install-emacs install-tmux install-karabiner install-hammerspoon
+install: install-zsh install-bash install-pythonrc install-bin install-git install-emacs install-tmux
 
 install-git:
 	ln -fs `pwd`/git/gitconfig ~/.gitconfig

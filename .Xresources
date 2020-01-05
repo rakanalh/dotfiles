@@ -1,5 +1,5 @@
 URxvt.iso14755 : false
-Xft.dpi: 96
+Xft.dpi: 72
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintfull
@@ -9,6 +9,7 @@ Xft.rgba: rgb
 
 URxvt.termName: rxvt-unicode-256color
 URxvt.font: xft:Hack:style=Book:antialias=true:size=12, \
+            xft:Monofur Nerd Font Mono:style=Book:pixelsize=12, \
             xft:WenQuanYi Bitmap Song:size=12, \
             xft:unifont:style=Medium:antialias=false, \
             xft:FreeSerif:style=Regular
@@ -18,6 +19,13 @@ URxvt*cursorColor: #d6d6d6
 URxvt.perl-ext-common:  default,clipboard
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt*letterSpace: -1
+URxvt.geometry: 130x40
+URxvt*scrollBar: false
+URxvt.depth: 32
+URxvt.urgentOnBell: true
+URxvt.scrollBar: false
+URxvt.matcher.button: 1
 
 ! Dracula Xresources palette
 *.foreground: #F8F8F2
@@ -40,10 +48,6 @@ URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 *.color15:    #E6E6E6
 
 Xcursor.size: 16W
-URxvt.urgentOnBell: true
-URxvt.scrollBar: false
-URxvt.depth: 24
-URxvt.matcher.button: 1
 
 Emacs.FontBackend: xft,x
 Emacs.font: Hack-12

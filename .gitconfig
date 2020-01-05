@@ -4,6 +4,7 @@
 [user]
   name = Rakan Alhneiti
   email = rakan.alhneiti@gmail.com
+	signingkey = A0F65F91960263EA
 
 [color]
   ui = auto
@@ -49,3 +50,5 @@
   autosetuprebase = always
 [help]
   autocorrect = 1
+[commit]
+	gpgsign = true

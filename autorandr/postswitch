@@ -1,18 +1,38 @@
-#!/usr/bin/env sh
-LOG_FILE="$HOME/.autorandr/log"
-# Close STDOUT file descriptor
-exec 1<&-
-# Close STDERR FD
-exec 2<&-
+#!/usr/bin/env bash
 
-# Open STDOUT as $LOG_FILE file for read and write.
-exec 1<>$LOG_FILE
+feh --bg-scale /home/rakan/.config/i3/wallpaper.jpg
 
-# Redirect STDERR to STDOUT
-exec 2>&1
-
-# killall -q polybar
-# while pgrep -x polybar >/dev/null; do sleep 1; done
-unset MONITOR
-/usr/bin/polybar Main &
-/usr/bin/polybar HDMI &
+if [ "${UMONITOR_PROFILE}" = "home" ]; then
+    i3-msg "workspace number 1; move workspace to output DP-1;";
+    i3-msg "workspace number 2; move workspace to output DP-1;";
+    i3-msg "workspace number 3; move workspace to output DP-1;";
+    i3-msg "workspace number 4; move workspace to output HDMI-2;";
+    i3-msg "workspace number 5; move workspace to output HDMI-2;";
+    i3-msg "workspace number 6; move workspace to output HDMI-2;";
+    i3-msg "workspace number 7; move workspace to output HDMI-2;";
+    i3-msg "workspace number 8; move workspace to output HDMI-2;";
+    i3-msg "workspace number 9; move workspace to output HDMI-2;";
+    i3-msg "workspace number 0; move workspace to output HDMI-2;";
+elif [ "${UMONTITOR_PROFILE}" = "work" ]; then
+    i3-msg "workspace number 1; move workspace to output HDMI-2;";
+    i3-msg "workspace number 2; move workspace to output DP-1;";
+    i3-msg "workspace number 3; move workspace to output HDMI-2;";
+    i3-msg "workspace number 4; move workspace to output DP-1;";
+    i3-msg "workspace number 5; move workspace to output DP-1;";
+    i3-msg "workspace number 6; move workspace to output DP-1;";
+    i3-msg "workspace number 7; move workspace to output DP-1;";
+    i3-msg "workspace number 8; move workspace to output DP-1;";
+    i3-msg "workspace number 9; move workspace to output DP-1;";
+    i3-msg "workspace number 0; move workspace to output DP-1;";
+elif [ "${UMONTITOR_PROFILE}" = "all-work" ]; then
+    i3-msg "workspace number 1; move workspace to output HDMI-2;";
+    i3-msg "workspace number 2; move workspace to output DP-1;";
+    i3-msg "workspace number 3; move workspace to output HDMI-2;";
+    i3-msg "workspace number 4; move workspace to output DP-1;";
+    i3-msg "workspace number 5; move workspace to output DP-1;";
+    i3-msg "workspace number 6; move workspace to output DP-1;";
+    i3-msg "workspace number 7; move workspace to output eDPI-1;";
+    i3-msg "workspace number 8; move workspace to output DP-1;";
+    i3-msg "workspace number 9; move workspace to output DP-1;";
+    i3-msg "workspace number 0; move workspace to output DP-1;";
+fi
