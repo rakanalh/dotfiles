@@ -35,16 +35,16 @@ font pango:SNFS Display 10
 floating_modifier $mod
 
 # Workspaces
-set $workspace1    "1:   Browser "
-set $workspace2    "2:   Terminal "
-set $workspace3    "3:   Code "
-set $workspace4    "4:   Music "
-set $workspace5    "5:   Chat "
-set $workspace6    "6:   Mail "
-set $workspace7    "7:  "
-set $workspace8    "8:  "
-set $workspace9    "9:  "
-set $workspace10   "10:   Browser "
+set $workspace1    "1:Browser"
+set $workspace2    "2:Terminal"
+set $workspace3    "3:Code"
+set $workspace4    "4:Chat"
+set $workspace5    "5:Misc"
+set $workspace6    "6:Misc"
+set $workspace7    "7:Misc"
+set $workspace8    "8:Misc"
+set $workspace9    "9:Misc"
+set $workspace10   "10:Browser"
 
 workspace 1 output primary
 workspace 2 output primary
@@ -60,8 +60,6 @@ exec setxkbmap -layout us,ara -variant ,mac -option grp:alt_space_toggle
 # Transparency
 # exec compton -f
 
-exec --no-startup-id umonitor --listen --daemonize
-#
 # Apps
 exec qutebrowser
 exec firefox-developer-edition
@@ -69,8 +67,7 @@ exec emacs
 exec telegram-desktop
 exec rocketchat-desktop
 # exec zeal
-exec i3-msg 'workspace 2; exec urxvt'
-exec i3-msg 'workspace 4; exec urxvt -e ncmpcpp'
+exec alacritty
 exec nm-applet &
 exec clipster -d &
 exec blueman-manager
@@ -79,7 +76,7 @@ exec blueman-manager
 bindsym $mod+Tab workspace back_and_forth
 
 # start a terminal
-bindsym $mod+t exec urxvt
+bindsym $mod+t exec alacritty
 bindsym $mod+p exec roficlip
 
 # kill focused window
@@ -203,13 +200,17 @@ bindsym XF86Search exec rofi -show run
 # Assign apps to workspaces
 assign [class="Google-chrome"] $workspace1
 assign [class="Firefox"] $workspace10
+assign [class="firefoxdeveloperedition"] $workspace10
+assign [class="Rocket.Chat"] $workspace4
 assign [class="Emacs"] $workspace3
 assign [class="Zeal"] $workspace3
+assign [class="alacritty"] $workspace2
 assign [class="URxvt"] $workspace2
 assign [class="URxvt" instance="ranger"] $workspace2
 # assign [class="Terminator"] $workspace2
-assign [class="Slack"] $workspace5
-assign [class="Telegram"] $workspace5
+assign [class="Slack"] $workspace4
+assign [class="Telegram"] $workspace4
+assign [class="Zoom"] $workspace4
 
 # Open specific applications in floating mode
 for_window [class="mpv"] floating enable resize set 640 480
@@ -222,10 +223,10 @@ for_window [window_role="gnome-calculator"] floating enable
 for_window [class="Pavucontrol"] floating enable resize set 640 480
 
 mode "umonitor" {
-        bindsym a exec umonitor -l all-work
-        bindsym h exec umonitor -l home
-        bindsym w exec umonitor -l work
-        bindsym l exec umonitor -l laptop
+        bindsym a exec umonitor -l all-work; mode "default"
+        bindsym h exec umonitor -l home; mode "default"
+        bindsym w exec umonitor -l work; mode "default"
+        bindsym l exec umonitor -l laptop; mode "default"
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -294,25 +295,25 @@ hide_edge_borders both
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-   position top
-   status_command          i3blocks
-   tray_output             primary
-   separator_symbol        " "
-   workspace_buttons       yes
-   strip_workspace_numbers yes
+# bar {
+#    position top
+#    status_command          i3blocks
+#    tray_output             primary
+#    separator_symbol        " "
+#    workspace_buttons       yes
+#    strip_workspace_numbers yes
 
-   colors {
-       background  #212121
-       statusline  #DDDDDD
-       separator   #777777
-       # class             border  backgr. text
-       focused_workspace   #777777 #2e004d #FFFFFF
-       active_workspace    #212121 #212121 #FFFFFF
-       inactive_workspace  #212121 #212121 #86888C
-       urgent_workspace    #2F343A #e65c00 #FFFFFF
-   }
-}
+#    colors {
+#        background  #212121
+#        statusline  #DDDDDD
+#        separator   #777777
+#        # class             border  backgr. text
+#        focused_workspace   #777777 #2e004d #FFFFFF
+#        active_workspace    #212121 #212121 #FFFFFF
+#        inactive_workspace  #212121 #212121 #86888C
+#        urgent_workspace    #2F343A #e65c00 #FFFFFF
+#    }
+# }
 
 #############################
 ### settings for i3-gaps: ###

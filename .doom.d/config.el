@@ -11,7 +11,7 @@
  `(flycheck-posframe-error-face   :inherit 'flycheck-posframe-face :foreground red)
  `(hi-lock-faces ))
 
-(custom-set-faces! '(window-divider :foreground "#363636"))
+;; (custom-set-faces! '(window-divider :foreground "#363636"))
 
 
 (setq doom-theme 'doom-tomorrow-night
@@ -63,6 +63,14 @@
       #'evil-mc-skip-and-goto-next-match)
 (map! :nv
       "gzS" #'evil-mc-skip-and-goto-prev-match)
+(map! :v "C-n" (general-predicate-dispatch nil ; fall back to nearest keymap
+                 (featurep! :editor multiple-cursors)
+                 #'evil-mc-make-and-goto-next-match))
+(map! :n "C-n" (general-predicate-dispatch nil ; fall back to nearest keymap
+                 (and (featurep! :editor multiple-cursors)
+                      (bound-and-true-p evil-mc-cursor-list))
+                 #'evil-mc-make-and-goto-next-match))
+(map! :n "C-S-n" #'evil-mc-make-cursor-move-next-line)
 
 ;;;;; PYTHON
 (add-hook 'before-save-hook #'py-isort-before-save)
@@ -72,6 +80,7 @@
 (setq-hook! 'rustic-mode-hook counsel-compile-history '("cargo build"))
 (add-hook 'rustic-mode-hook #'cargo-minor-mode)
 
+(add-hook 'rust-mode-hook #'rustic-mode)
 (after! rustic
   (map! :localleader
         :map rustic-mode-map
@@ -102,3 +111,6 @@
       "d" #'ebuku-delete-bookmark
       "s" #'ebuku-search
       "r" #'ebuku-refresh)
+
+;;;;; Documentation
+(set-docsets! 'rustic-mode "Rust")

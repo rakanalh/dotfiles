@@ -8,6 +8,10 @@
 ;;
 (package! auto-highlight-symbol)
 
+(package! rust-mode :disable t)
+
+(package! whitespace-mode :disable t)
+
 (package! cargo)
 
 (package! flycheck-mypy)

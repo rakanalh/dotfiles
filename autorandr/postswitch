@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 feh --bg-scale /home/rakan/.config/i3/wallpaper.jpg
+sh -c '/home/rakan/.config/polybar/launch.sh'
 
 if [ "${UMONITOR_PROFILE}" = "home" ]; then
     i3-msg "workspace number 1; move workspace to output DP-1;";

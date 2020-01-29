@@ -42,6 +42,7 @@
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        window-select     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
+       zen
 
        :editor
        (evil +everywhere); come to the dark side, we have cookies
@@ -69,6 +70,10 @@
        ;;term              ; terminals in Emacs
        vterm             ; another terminals in Emacs
 
+       :checkers
+       syntax
+       ;;flyspell          ; tasing you for misspelling mispelling
+
        :tools
        ;;ansible
        ;;debugger          ; FIXME stepping through code, to help you add bugs
@@ -77,8 +82,6 @@
        editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
-       (flycheck +childframe)          ; tasing you for every semicolon you forget
-       ;;flyspell          ; tasing you for misspelling mispelling
        ;;gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
         +docsets)        ; ...or in Dash docsets locally

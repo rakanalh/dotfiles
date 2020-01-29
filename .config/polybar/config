@@ -120,33 +120,35 @@ label-visible-font = 1
 
 ;label-focused = %index%
 label-focused-foreground = ${colors.white}
-label-focused-padding = 2
+label-focused-padding = 5
 
 ;label-unfocused = %index%
-label-unfocused-padding = 2
+label-unfocused-padding = 5
 label-unfocused-foreground = ${colors.gray}
 ;label-unfocused-underline = ${colors.white}
 
 ;label-urgent = %index%!
 ;label-urgent-background = ${colors.red}
-label-urgent-padding = 2
+label-urgent-padding = 5
 label-urgent-foreground = ${colors.red}
 
 ;label-visible = %index%
 label-visible-foreground = ${colors.white}
-label-visible-padding = 2
+label-visible-padding = 5
 
+label-separator = |
+label-separator-padding = 5
 
-ws-icon-0 = 1;
+ws-icon-0 = Browser;
 ws-icon-1 = 2;
 ws-icon-2 = 3;
 ws-icon-3 = 4;
 ws-icon-4 = 5;
 ws-icon-5 = 6;
 ws-icon-6 = 7;
-ws-icon-7 = 8;
-ws-icon-8 = 9;
-ws-icon-9 = 10;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
 
 
 [module/backlight]
