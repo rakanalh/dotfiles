@@ -1,3 +1,6 @@
 [submodule "awesome/sharedtags"]
 	path = awesome/sharedtags
 	url = git@github.com:Drauthius/awesome-sharedtags.git
+[submodule "polybar/scripts/i3windows"]
+	path = polybar/scripts/i3windows
+	url = git@github.com:rakanalh/polybar-i3-windows.git
