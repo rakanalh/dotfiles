@@ -44,6 +44,8 @@ fi
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -96,6 +98,7 @@ export TERM=xterm-256color
 export IGNOREEOF=1
 export LESS=FRSX
 
+export BROWSER=qutebrowser
 export EDITOR=emacs
 export PYOPEN_CMD=emacs
 export GIT_EDITOR="${EDITOR} -nw -Q"
@@ -149,9 +152,9 @@ alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C
 
 alias vag='vagrant $@'
 
-eval "$(pyenv init -)"
+# eval "$(pyenv init -)"
 
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 function lastcommandfailed() {
   code=$?
@@ -165,10 +168,6 @@ function lastcommandfailed() {
 function cleanpycs() {
   find . -name "*.pyc" -exec rm -rf {} \;
 }
-
-
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 alias raiden-testnet='raiden --accept-disclaimer --keystore-path ~/.ethereum/testnet/keystore/ --log-config "raiden.raiden_service:DEBUG,raiden.blockchain_events_handler:DEBUG,raiden.network.proxies.token_network:DEBUG" $@'
 alias raiden-local='raiden --accept-disclaimer --network-id 4555 --keystore-path ../LocalGeth/data/keystore --registry-contract-address "0x90845Eb9bB31EE5C20e3776117BAb33582a4f823" --discovery-contract-address "0x4410bd7E4682a51358FCa06307470f987c0156d9" --secret-registry-contract-address "0x77487673F3dCE2810202b2c90613CdCb284c0103" --no-sync-check --log-config "raiden.raiden_service:DEBUG,raiden.blockchain_events_handler:DEBUG,raiden.network.proxies.token_network:DEBUG"y'

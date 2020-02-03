@@ -17,3 +17,5 @@
 (package! flycheck-mypy)
 
 (package! buku :recipe (:host github :repo "flexibeast/ebuku"))
+
+(package! parent-mode)

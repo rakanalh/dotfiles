@@ -174,7 +174,7 @@ bindsym $mod+Shift+p exec rofi-pass --last-used
 #-lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -color-window "$bg-color" "$text-color" -color-active "$bg-color" "#9575cd" -color-normal "$inactive-bg-color" "$text-color" -font "System San Francisco Display 18"
 
 # Lock Screen
-bindsym $mod+shift+x exec /usr/bin/i3lock-fancy -b=0x8
+bindsym $mod+shift+x exec /usr/bin/i3lock-fancy
 # ~/.config/i3/lock.sh
 
 # Pulse Audio controls
