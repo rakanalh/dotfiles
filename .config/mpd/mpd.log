@@ -1,0 +1,12 @@
+Feb 04 02:53 : exception: RTIOThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Feb 04 02:53 : exception: Failed to open '/home/rakan/.config/mpd/mpdstate': No such file or directory
+Feb 04 02:53 : exception: Failed to access /home/rakan/Music: No such file or directory
+Feb 04 02:53 : client: [0] opened from 127.0.0.1:57446
+Feb 04 02:53 : exception: RTIOThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Feb 04 02:53 : exception: Failed to open '/home/rakan/.config/mpd/mpdstate': No such file or directory
+Feb 04 02:53 : client: [0] opened from 127.0.0.1:57472
+Feb 04 02:54 : client: [1] opened from 127.0.0.1:57478
+Feb 04 02:54 : client: [1] closed
+Feb 04 02:54 : client: [2] opened from 127.0.0.1:57482
+Feb 04 09:07 : client: [0] closed
+Feb 04 09:24 : client: [3] opened from 127.0.0.1:32768
