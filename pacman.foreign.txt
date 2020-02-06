@@ -1,0 +1,15 @@
+autojump
+batterymon-clone
+i3lock-fancy-git
+inxi
+laptop-mode-tools
+lightdm-settings
+lightdm-slick-greeter
+polybar
+pulseaudio-ctl
+python-notify2
+python-umonitor-git
+qutebrowser-git
+termsyn-font
+yay
+youtube-viewer-git

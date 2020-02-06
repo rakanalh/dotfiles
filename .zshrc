@@ -108,14 +108,13 @@ export JAVA_HOME="/usr/lib/jvm/default"
 export PROJECT_HOME=$HOME/Code/Python/
 export GOPATH=$HOME/Code/Go
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/go/bin:/opt/sm/bin:/opt/sm/pkg/active/bin:/opt/sm/pkg/active/sbin:${ANDROID_HOME}platform-tools/:$GOROOT/bin:$GOPATH/bin:~/.bin;~/.cargo/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/go/bin:/opt/sm/bin:/opt/sm/pkg/active/bin:/opt/sm/pkg/active/sbin:$GOROOT/bin:$GOPATH/bin:~/.bin:$HOME/.cargo/bin"
 
 # python
 export PYTHONDONTWRITEBYTECODE=1
 export PYTHONSTARTUP="$HOME/.pythonrc.py"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
 
 # Other
 export DISABLE_AUTO_TITLE='true'

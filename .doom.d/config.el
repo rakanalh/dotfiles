@@ -77,6 +77,8 @@
 (setq-hook! 'python-mode-hook flycheck-checker 'python-mypy)
 
 ;;;;; RUST
+(setq lsp-rust-analyzer-server-command '("/home/rakan/.cargo/bin/ra_lsp_server"))
+
 (setq-hook! 'rustic-mode-hook counsel-compile-history '("cargo build"))
 (add-hook 'rustic-mode-hook #'cargo-minor-mode)
 
