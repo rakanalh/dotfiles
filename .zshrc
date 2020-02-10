@@ -108,7 +108,7 @@ export JAVA_HOME="/usr/lib/jvm/default"
 export PROJECT_HOME=$HOME/Code/Python/
 export GOPATH=$HOME/Code/Go
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/go/bin:/opt/sm/bin:/opt/sm/pkg/active/bin:/opt/sm/pkg/active/sbin:$GOROOT/bin:$GOPATH/bin:~/.bin:$HOME/.cargo/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/go/bin:/opt/sm/bin:/opt/sm/pkg/active/bin:/opt/sm/pkg/active/sbin:$GOROOT/bin:$GOPATH/bin:$HOME/.bin:$HOME/.cargo/bin"
 
 # python
 export PYTHONDONTWRITEBYTECODE=1
