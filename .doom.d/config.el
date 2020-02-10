@@ -5,7 +5,7 @@
 ;;;;; EMACS
 
 (load-theme 'doom-tomorrow-night t)
-
+(setq doom-font (font-spec :family "Menlo" :size 10))
 (custom-theme-set-faces! 'doom-tomorrow-night
  `(flycheck-posframe-background-face :background ,(doom-darken 'grey 0.4))
  `(flycheck-posframe-error-face   :inherit 'flycheck-posframe-face :foreground red)
@@ -44,6 +44,10 @@
       :prefix "w"
       "1" #'delete-other-windows)
 
+;;; WHITESPACE MODE
+;; (after! whitespace
+;;   (whitespace-global-modes -1))
+
 ;;; Terminal
 (add-hook! 'vterm-mode-hook
     (add-hook 'doom-switch-window-hook #'evil-insert-state nil 'local))
@@ -77,7 +81,8 @@
 (setq-hook! 'python-mode-hook flycheck-checker 'python-mypy)
 
 ;;;;; RUST
-(setq lsp-rust-analyzer-server-command '("/home/rakan/.cargo/bin/ra_lsp_server"))
+(setq rustic-lsp-server 'rust-analyzer)
+(setq lsp-rust-analyzer-server-command '("/Users/rakan/.cargo/bin/ra_lsp_server"))
 
 (setq-hook! 'rustic-mode-hook counsel-compile-history '("cargo build"))
 (add-hook 'rustic-mode-hook #'cargo-minor-mode)
@@ -115,4 +120,3 @@
       "r" #'ebuku-refresh)
 
 ;;;;; Documentation
-(set-docsets! 'rustic-mode "Rust")

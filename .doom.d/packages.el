@@ -10,7 +10,9 @@
 
 (package! rust-mode :disable t)
 
-(package! whitespace-mode :disable t)
+(package! format-all :disable t)
+
+(package! whitespace :disable t)
 
 (package! cargo)
 
