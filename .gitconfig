@@ -45,8 +45,8 @@
 
 [push]
   default = current
-[branch]
-  autosetuprebase = always
+;[branch]
+;  autosetuprebase = always
 [help]
   autocorrect = 1
 [commit]

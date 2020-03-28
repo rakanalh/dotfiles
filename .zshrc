@@ -130,7 +130,7 @@ alias docker-remove-all="docker rm \$(docker ps -a -q)"
 alias docker-update-all="docker images | awk '{print $1}' | xargs -L1 docker pull"
 
 alias e="emacsclient -t -a ''"
-alias emacsbare="emacs -nw -Q --eval \"(load-theme 'wombat)\""
+alias emacsbare="emacs -nw -Q"
 alias eb="emacsbare"
 alias ec="e"
 alias vim="eb"
