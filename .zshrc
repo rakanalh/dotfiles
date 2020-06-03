@@ -46,7 +46,6 @@ fi
 # ZSH_CUSTOM=/path/to/new-custom-folder
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -113,8 +112,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/us
 # python
 export PYTHONDONTWRITEBYTECODE=1
 export PYTHONSTARTUP="$HOME/.pythonrc.py"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-export PYENV_ROOT="$HOME/.pyenv"
+export WORKON_HOME="$HOME/.pyvenvs"
 
 # Other
 export DISABLE_AUTO_TITLE='true'
@@ -133,8 +131,6 @@ alias e="emacsclient -t -a ''"
 alias emacsbare="emacs -nw -Q"
 alias eb="emacsbare"
 alias ec="e"
-alias vim="eb"
-alias vi="eb"
 
 alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
 
@@ -150,10 +146,9 @@ alias edit='$EDITOR $@'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 
 alias vag='vagrant $@'
+alias vi='vim'
 
-# eval "$(pyenv init -)"
-
-# eval "$(pyenv virtualenv-init -)"
+source /usr/bin/virtualenvwrapper.sh
 
 function lastcommandfailed() {
   code=$?
@@ -172,5 +167,12 @@ alias raiden-testnet='raiden --accept-disclaimer --keystore-path ~/.ethereum/tes
 alias raiden-local='raiden --accept-disclaimer --network-id 4555 --keystore-path ../LocalGeth/data/keystore --registry-contract-address "0x90845Eb9bB31EE5C20e3776117BAb33582a4f823" --discovery-contract-address "0x4410bd7E4682a51358FCa06307470f987c0156d9" --secret-registry-contract-address "0x77487673F3dCE2810202b2c90613CdCb284c0103" --no-sync-check --log-config "raiden.raiden_service:DEBUG,raiden.blockchain_events_handler:DEBUG,raiden.network.proxies.token_network:DEBUG"y'
 
 alias cat="bat"
+alias ls="exa"
+alias tree="exa -T"
 # alias grep="rg"
-# alias find="fg"
+# alias find="fd"
+
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi

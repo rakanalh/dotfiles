@@ -10,7 +10,8 @@ local lain  = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
 local dpi   = require("beautiful.xresources").apply_dpi
-
+local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
+local volumearc_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
 local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
@@ -301,10 +302,8 @@ function theme.at_screen_connect(s)
          --theme.mail.widget,
          mpdicon,
          theme.mpd.widget,
-         volicon,
-         theme.volume.widget,
-         baticon,
-         bat.widget,
+         volumearc_widget({height = 50}),
+         batteryarc_widget(),
          clockicon,
          mytextclock,
          wibox.widget.systray(),

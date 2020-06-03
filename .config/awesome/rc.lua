@@ -712,10 +712,10 @@ globalkeys = my_table.join(
    -- alternatively use rofi, a dmenu-like application with more features
    -- check https://github.com/DaveDavenport/rofi for more details
 
-   awful.key({modkey}, "Return", function ()
-         os.execute(string.format("rofi -show %s -theme %s",
-                                  'run', '.local/share/rofi/themes/oxide'))
-                                 end,
+   awful.key({modkey}, "Return",
+      function ()
+         awful.spawn("rofi -show run")
+      end,
       {description = "show rofi", group = "launcher"}),
    -- Prompt
    -- awful.key(

@@ -5,7 +5,7 @@
 ;;;;; EMACS
 
 (load-theme 'doom-tomorrow-night t)
-(setq doom-font (font-spec :family "Menlo" :size 10))
+(setq doom-font (font-spec :family "Hack" :size 10))
 (custom-theme-set-faces! 'doom-tomorrow-night
  `(flycheck-posframe-background-face :background ,(doom-darken 'grey 0.4))
  `(flycheck-posframe-error-face   :inherit 'flycheck-posframe-face :foreground red)
@@ -111,21 +111,25 @@
 (setq-hook! 'python-mode-hook flycheck-checker 'python-mypy)
 
 ;;;;; RUST
-(setq-hook! 'rustic-mode-hook indent-tabs-mode t)
-(setq lsp-rust-server 'rust-analyzer)
-(setq lsp-rust-analyzer-server-command "/Users/rakan/.cargo/bin/rust-analyzer")
-(setq lsp-enable-file-watchers nil)
-(setq lsp-enable-completion-at-point t)
-(setq lsp-enable-imenu t)
-(setq lsp-rust-analyzer-cargo-watch-enable nil)
-(setq lsp-log-io t)
-(setq lsp-ui-doc-delay 0.7)
-(setq eldoc-idle-delay 0.5)
+(setq lsp-rust-server 'rust-analyzer
+      lsp-rust-analyzer-server-command "/usr/bin/rust-analyzer"
+      lsp-enable-file-watchers nil
+      lsp-enable-completion-at-point t
+      lsp-enable-imenu t
+      lsp-rust-analyzer-cargo-watch-enable nil
+      lsp-log-io t
+      lsp-ui-doc-delay 0.7
+      lsp-ui-doc-enable nil
+      lsp-ui-sideline-code-actions-prefix " "
+      lsp-ui-sideline-show-hover nil
+      lsp-rust-analyzer-server-display-inlay-hints t)
 ;; (setq lsp-rust-rustfmt-bin (expand-file-name "~/.cargo/bin/gitfmt"))
 ;; (setq lsp-rust-analyzer-cargo-watch-command "check")
+(setq-hook! 'rustic-mode-hook indent-tabs-mode t)
 (setq rustic-lsp-server 'rust-analyzer)
 (setq rustic-format-on-save nil)
 (setq rustic-lsp-format nil)
+(setq eldoc-idle-delay 0.5)
 ;;(setq rustic-rustfmt-bin (expand-file-name "~/.cargo/bin/gitfmt"))
 
 (setq-hook! 'rustic-mode-hook counsel-compile-history '("cargo build"))
@@ -174,18 +178,25 @@
 ;;     :definition 'lsp-find-definitions
 ;;     :references 'lsp-ui-peek-find-references)
 
-;;;;; EBUKU
-(map! :mode ebuku-mode
-      :map ebuku-mode-map
-      :n
-      "j" #'next-line
-      "k" #'previous-line
-      "h" #'backward-char
-      "l" #'forward-char
-      "a" #'ebuku-add-bookmark
-      "e" #'ebuku-edit-bookmark
-      "d" #'ebuku-delete-bookmark
-      "s" #'ebuku-search
-      "r" #'ebuku-refresh)
+;;;;; Org-Journal
+(setq org-journal-dir "~/org/journal")
 
+;;;;; Org-present
+(map! :after org-present
+      :map org-present-mode-keymap
+      :desc "Org present - next slide"
+      :n "n" #'org-present-next)
+
+(map! :after org-present
+      :map org-present-mode-keymap
+      :desc "Org present - next slide"
+      :n "p" #'org-present-prev)
+
+;;;;; Google-Translate
+(after! google-translate
+  (require 'google-translate-smooth-ui)
+  (setq google-translate-default-source-language "de")
+  (setq google-translate-default-target-language "en")
+  (setq google-translate-translation-directions-alist
+      '(("de" . "en") ("en" . "de") ("de" . "ar") ("ar" . "de"))))
 ;;;;; Documentation

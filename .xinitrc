@@ -1,3 +1,3 @@
 #!/bin/bash
-/home/rakan/.fehbg &
-exec i3
+#/home/rakan/.fehbg &
+# exec i3

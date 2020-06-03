@@ -18,6 +18,16 @@
 
 (package! flycheck-mypy)
 
-(package! buku :recipe (:host github :repo "flexibeast/ebuku"))
-
 (package! parent-mode)
+
+(package! rust-playground)
+
+(package! org-journal)
+
+(package! org-present)
+
+(package! protobuf-mode)
+
+(package! google-translate)
+
+(unpin! rustic lsp-mode lsp-ui)

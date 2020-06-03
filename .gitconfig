@@ -4,6 +4,7 @@
 [user]
   name = Rakan Alhneiti
   email = rakan.alhneiti@gmail.com
+  signingkey = 0191F472633F8990417AA4DAA0F65F91960263EA
 
 [color]
   ui = auto
@@ -41,13 +42,16 @@
 
 [core]
   pager = less -R
-	editor = /usr/local/bin/emacs -nw -Q
+  editor = /usr/local/bin/emacs -nw -Q
 
 [push]
   default = current
+
 ;[branch]
 ;  autosetuprebase = always
+
 [help]
   autocorrect = 1
+
 [commit]
-	gpgsign = false
+  gpgsign = true

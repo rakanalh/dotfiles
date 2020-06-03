@@ -7,3 +7,6 @@
 [submodule ".config/polybar/scripts/i3windows"]
 	path = .config/polybar/scripts/i3windows
 	url = git@github.com:rakanalh/polybar-i3-windows.git
+[submodule ".config/awesome/awesome-wm-widgets"]
+	path = .config/awesome/awesome-wm-widgets
+	url = https://github.com/streetturtle/awesome-wm-widgets.git
