@@ -22,12 +22,29 @@
 
 (package! rust-playground)
 
-(package! org-journal)
-
 (package! org-present)
+
+(package! mu4e-dashboard
+  :recipe (:host github :repo "rougier/mu4e-dashboard"))
+
+;; (package! org-habit-plus
+;;   :recipe (:host github :repo "oddious/org-habit-plus"))
 
 (package! protobuf-mode)
 
 (package! google-translate)
+
+(package! org-gtasks
+  :recipe
+  (:host github
+   :repo "rakanalh/org-gtasks"
+   :files ("org-gtasks.el")))
+
+;; (package!
+;;  github-review
+;;  :recipe
+;;     (:host github
+;;      :repo "charignon/github-review"
+;;      :files ("github-review.el")))
 
 (unpin! rustic lsp-mode lsp-ui)

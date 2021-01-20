@@ -12,7 +12,7 @@
  `(hi-lock-faces ))
 
 ;; (custom-set-faces! '(window-divider :foreground "#363636"))
-
+(setq auth-sources '("~/.authinfo"))
 
 (setq doom-theme 'doom-tomorrow-night
       projectile-enable-caching t
@@ -158,7 +158,7 @@
         :map rustic-mode-map
         :prefix "b"
         :desc "cargo check w/ tests"
-        "t" (lambda! (cargo-process--start "Check Tests" "check --tests"))))
+        "t" (cmd! (cargo-process--start "Check Tests" "check --tests"))))
 
 (after! cargo
   (set-popup-rule! "Cargo Check" :ignore nil :actions: nil :side 'bottom :width 0.5 :quit 'current :select t :vslot 1 :slot 0)
@@ -179,7 +179,8 @@
 ;;     :references 'lsp-ui-peek-find-references)
 
 ;;;;; Org-Journal
-(setq org-journal-dir "~/org/journal")
+(setq org-directory "~/Documents/org")
+(setq org-journal-dir "~/Documents/org/journal")
 
 ;;;;; Org-present
 (map! :after org-present
@@ -199,4 +200,30 @@
   (setq google-translate-default-target-language "en")
   (setq google-translate-translation-directions-alist
       '(("de" . "en") ("en" . "de") ("de" . "ar") ("ar" . "de"))))
+
+
+
+(require 'org-habit)
+;(require 'org-habit-plus)
+(after! org (add-to-list 'org-modules 'org-habit t))
+;(after! org (add-to-list 'org-modules 'org-habit-plus))
+(after! org (setq org-habit-show-habits t
+                  org-treat-insert-todo-heading-as-state-change t
+                  org-log-into-drawer t
+                  org-agenda-dim-blocked-tasks nil))
+
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+
 ;;;;; Documentation
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values '((rustic-format-on-save))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
