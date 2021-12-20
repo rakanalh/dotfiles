@@ -1,0 +1,10 @@
+[Unit]
+Description=Yay update
+Requires=yay-update.service
+
+[Timer]
+Unit=yay-update.service
+OnCalendar=*-*-* 00:00:00
+
+[Install]
+WantedBy=timers.target

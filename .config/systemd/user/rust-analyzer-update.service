@@ -1,0 +1,10 @@
+[Unit]
+Description=Rust analyzer update
+Wants=rust-analyzer-update.timer
+
+[Service]
+ExecStart=/home/rakan/Code/Rust/rust-analyzer/update.sh
+WorkingDirectory=/home/rakan/Code/Rust/rust-analyzer/
+
+[Install]
+WantedBy=multi-user.target

@@ -27,6 +27,8 @@
 (package! mu4e-dashboard
   :recipe (:host github :repo "rougier/mu4e-dashboard"))
 
+(package! mu4e-alert)
+
 ;; (package! org-habit-plus
 ;;   :recipe (:host github :repo "oddious/org-habit-plus"))
 
@@ -47,4 +49,5 @@
 ;;      :repo "charignon/github-review"
 ;;      :files ("github-review.el")))
 
-(unpin! rustic lsp-mode lsp-ui)
+;; (unpin! rustic lsp-mode lsp-ui)
+;; (unpin! magit forge gitconfig-mode)

@@ -7,7 +7,7 @@
 ;;
 ;; More information about these modules (and what flags they support) can be
 ;; found in modules/README.org.
-
+(setq native-comp-deferred-compilation t)
 (doom! :input
        ;;chinese
        ;;japanese
@@ -26,7 +26,7 @@
        ;;fill-column       ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        hydra
-       ;;indent-guides     ; highlighted indent columns
+       indent-guides     ; highlighted indent columns
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink the current line after jumping
        ;;neotree           ; a project drawer, like NERDTree for vim
@@ -77,7 +77,7 @@
 
        :tools
        ;;ansible
-       ;;debugger          ; FIXME stepping through code, to help you add bugs
+       (debugger +lsp)          ; FIXME stepping through code, to help you add bugs
        ;;direnv
        ;;docker
        editorconfig      ; let someone else argue about tabs vs spaces
@@ -133,13 +133,15 @@
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org              ; organize your plain life in plain text
+        +brain
         +dragndrop       ; drag & drop files/images into org buffers
         ;;+hugo            ; use Emacs for hugo blogging
         +ipython         ; ipython/jupyter support for babel
+        +journal
         +pandoc          ; export-with-pandoc support
         +pomodoro        ; be fruitful with the tomato technique
-        +journal
-        +present)        ; using org-mode for presentations
+        +present         ; using org-mode for presentations
+        +roam)
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more

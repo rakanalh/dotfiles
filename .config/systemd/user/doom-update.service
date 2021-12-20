@@ -1,0 +1,10 @@
+[Unit]
+Description=Doom update
+Wants=doom-update.timer
+
+[Service]
+ExecStart=/home/rakan/.emacs.d/bin/doom -y upgrade
+WorkingDirectory=/home/rakan/
+
+[Install]
+WantedBy=multi-user.target

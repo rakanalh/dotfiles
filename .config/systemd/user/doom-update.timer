@@ -1,0 +1,10 @@
+[Unit]
+Description=Update doom
+Requires=doom-update.service
+
+[Timer]
+Unit=doom-update.service
+OnCalendar=*-*-* 00:00:00
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,10 @@
+[Unit]
+Description=yay update
+Wants=yay-update.timer
+
+[Service]
+ExecStart=yay -Sy
+WorkingDirectory=/home/rakan/
+
+[Install]
+WantedBy=multi-user.target

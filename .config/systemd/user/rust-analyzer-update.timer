@@ -1,0 +1,10 @@
+[Unit]
+Description=Update rust-analyzer
+Requires=rust-analyzer-update.service
+
+[Timer]
+Unit=rust-analyzer-update.service
+OnCalendar=*-*-* 00:00:00
+
+[Install]
+WantedBy=timers.target

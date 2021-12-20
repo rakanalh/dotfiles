@@ -1,0 +1,3 @@
+configuration {
+  theme: "/home/rakan/.local/share/rofi/themes/oxide.rasi";
+}

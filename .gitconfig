@@ -1,5 +1,5 @@
 [github]
-  user = rakanalh
+	user = rakanalh
 
 [user]
   name = Rakan Alhneiti
@@ -43,6 +43,9 @@
 [core]
   pager = less -R
   editor = /usr/local/bin/emacs -nw -Q
+
+[merge]
+	conflictStyle = diff3
 
 [push]
   default = current

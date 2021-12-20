@@ -54,7 +54,11 @@ plugins=(
   git
   autojump
   zsh-autosuggestions
+  fzf-zsh-plugin
 )
+
+unsetopt autocd
+setopt histignorealldups
 
 # User configuration
 
