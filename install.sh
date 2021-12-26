@@ -18,13 +18,77 @@ yay --save --answerclean All --answerdiff All
 yay --save --nocleanmenu --nodiffmenu
 
 # Install System Dependencies
-yay -S wget vim blueman bluez bluez-utils udisks2 udiskie dbus-broker zsh oh-my-zsh-git ntfs-3g openssh yubikey-manager yubico-pam pam-u2f libfido2 pcsclite ccid hopenpgp-tools yubikey-personalization pinentry zsh zsh-syntax-highlighting zsh-autosuggestions autojump xf86-video-intel lxappearance adwaita-icon-theme htop pulseaudio-bluetooth acpi_call nvidia-settings rsync
+yay -S \
+  autojump \
+  acpi_call \
+  blueman \
+  bluez \
+  bluez-utils \
+  ccid \
+  dbus-broker \
+  htop \
+  hopenpgp-tools \
+  libfido2 \
+  lxappearance \
+  ntfs-3g \
+  nvidia-settings \
+  oh-my-zsh-git \
+  openssh \
+  pam-u2f \
+  pcsclite \
+  pinentry \
+  pulseaudio-bluetooth \
+  rsync\
+  udisks2 \
+  udiskie \
+  vim \
+  wget \
+  xf86-video-intel \
+  yubikey-manager \
+  yubico-pam \
+  yubikey-personalization \
+  zsh \
+  zsh-syntax-highlighting \
+  zsh-autosuggestions 
 
 # Install fonts
-yay -S ttf-ubuntu-font-family ttf-hack nerd-fonts ttf-font-awesome ttf-ubuntu-arabic noto-fonts ttf-ms-fonts
+yay -S \
+  ttf-ubuntu-font-family \
+  ttf-hack \
+  nerd-fonts \
+  ttf-font-awesome \
+  ttf-ubuntu-arabic \
+  noto-fonts-complete\
+  ttf-ms-fonts
 
 # Install Apps
-yay -S alacritty pcmanfm gnupg stow rofi rofi-pass rofi-calc firefox nerd-fonts-complete element-desktop telegram-desktop slack zoom google-chrome ledger-live-bin tmux bat fzf exa arc-gtk-theme arc-icon-theme i3lock-fancy pavucontrol deepin-calculator deepin-screenshot transmission-gtk
+yay -S \
+  alacritty \
+  adwaita-icon-theme \
+  arc-gtk-theme \
+  arc-icon-theme \
+  bat \
+  deepin-calculator \
+  deepin-screenshot \
+  exa \
+  element-desktop \
+  firefox \
+  fzf \
+  gnupg \
+  google-chrome \
+  i3lock-fancy \
+  ledger-live-bin \
+  pcmanfm \
+  pavucontrol \
+  rofi \
+  rofi-pass \
+  rofi-calc \
+  stow \
+  slack \
+  telegram-desktop \
+  transmission-gtk \
+  tmux \
+  zoom 
 
 # Install Python
 yay -S python39 python-virtualenv libffi libsrtp
