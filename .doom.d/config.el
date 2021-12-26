@@ -123,7 +123,7 @@
 (after! lsp-mode
   (set-popup-rule! "^\\*lsp-help*" :ignore nil :actions: nil :side 'bottom :width 0.5 :quit 'current :select t :vslot 2 :slot 0)
   (setq lsp-rust-server 'rust-analyzer
-      lsp-rust-analyzer-server-command "/home/rakan/.cargo/bin/rust-analyzer"
+      lsp-rust-analyzer-server-command "/usr/bin/rust-analyzer"
       lsp-enable-file-watchers nil
       lsp-completion-enable t
       lsp-enable-imenu t
