@@ -123,7 +123,7 @@
 (after! lsp-mode
   (set-popup-rule! "^\\*lsp-help*" :ignore nil :actions: nil :side 'bottom :width 0.5 :quit 'current :select t :vslot 2 :slot 0)
   (setq lsp-rust-server 'rust-analyzer
-      lsp-rust-analyzer-server-command "/usr/bin/rust-analyzer"
+      lsp-rust-analyzer-server-command "~/.cargo/bin/rust-analyzer"
       lsp-enable-file-watchers nil
       lsp-completion-enable t
       lsp-enable-imenu t
@@ -162,10 +162,10 @@
 (setq rustic-lsp-format nil)
 (setq eldoc-idle-delay 0.5)
 ;;(setq rustic-rustfmt-bin (expand-file-name "~/.cargo/bin/gitfmt"))
-(setq-hook! 'rustic-mode-hook counsel-compile-history '("cargo build"))
-(setq-hook! 'rustic-mode-hook indent-tabs-mode t)
+;; (setq-hook! 'rustic-mode-hook counsel-compile-history '("cargo build"))
+;; (setq-hook! 'rustic-mode-hook indent-tabs-mode nil)
 (add-hook 'rustic-mode-hook #'cargo-minor-mode)
-(add-hook 'rust-mode-hook #'rustic-mode)
+;; (add-hook 'rust-mode-hook #'rustic-mode)
 (after! rustic
 ;;   (map! :localleader
 ;;         :map rustic-mode-map
@@ -193,7 +193,17 @@
         :map rustic-mode-map
         :prefix "b"
         :desc "cargo check w/ tests"
-        "t" (cmd! (cargo-process--start "Check Tests" "check --tests"))))
+        "t" (cmd! (cargo-process--start "Check Tests" "check --tests")))
+  (map! :localleader
+        :map rustic-compilation-mode-map
+        :prefix "["
+        :desc "Next Error"
+        "[" #'compilation-next-error)
+  (map! :localleader
+        :map rustic-compilation-mode-map
+        :prefix "]"
+        :desc "Previous Error"
+        "]" #'compilation-previous-error))
 
 ;; (after! cargo
 ;;   (set-popup-rule! "Cargo Check" :ignore nil :actions: nil :side 'bottom :width 0.5 :quit 'current :select t :vslot 1 :slot 0)
@@ -205,29 +215,29 @@
 (setq org-journal-dir "~/Documents/org/journal")
 
 ;;;;; Org-present
-(map! :after org-present
-      :map org-present-mode-keymap
-      :desc "Org present - next slide"
-      :n "n" #'org-present-next)
-
-(map! :after org-present
-      :map org-present-mode-keymap
-      :desc "Org present - next slide"
-      :n "p" #'org-present-prev)
+;; (map! :after org-present
+;;       :map org-present-mode-keymap
+;;       :desc "Org present - next slide"
+;;       :n "n" #'org-present-next)
+;; 
+;; (map! :after org-present
+;;       :map org-present-mode-keymap
+;;       :desc "Org present - next slide"
+;;       :n "p" #'org-present-prev)
 
 ;;;;; Org-Brain
-(after! org-brain
-  (cl-pushnew '("b" "Brain" plain (function org-brain-goto-end)
-                "** %i%?\n:RESOURCES:\n- %a\n:END:\n" :empty-lines 1)
-              org-capture-templates
-              :key #'car :test #'equal)
-  (set-evil-initial-state! 'org-brain-visualize-mode 'normal)
-  (let (keys)
-    (map-keymap (lambda (event function)
-                  (push function keys)
-                  (push event keys))
-                org-brain-visualize-mode-map)
-    (apply #'evil-define-key* 'normal org-brain-visualize-mode-map keys)))
+;(after! org-brain
+;  (cl-pushnew '("b" "Brain" plain (function org-brain-goto-end)
+;                "** %i%?\n:RESOURCES:\n- %a\n:END:\n" :empty-lines 1)
+;              org-capture-templates
+;              :key #'car :test #'equal)
+;  (set-evil-initial-state! 'org-brain-visualize-mode 'normal)
+;  (let (keys)
+;    (map-keymap (lambda (event function)
+;                  (push function keys)
+;                  (push event keys))
+;                org-brain-visualize-mode-map)
+;    (apply #'evil-define-key* 'normal org-brain-visualize-mode-map keys)))
 
 ;;;;; Google-Translate
 (after! google-translate
@@ -238,14 +248,14 @@
       '(("de" . "en") ("en" . "de") ("de" . "ar") ("ar" . "de"))))
 
 
-(require 'org-habit)
+;(require 'org-habit)
 ;(require 'org-habit-plus)
-(after! org (add-to-list 'org-modules 'org-habit t))
+;(after! org (add-to-list 'org-modules 'org-habit t))
 ;(after! org (add-to-list 'org-modules 'org-habit-plus))
-(after! org (setq org-habit-show-habits t
-                  org-treat-insert-todo-heading-as-state-change t
-                  org-log-into-drawer t
-                  org-agenda-dim-blocked-tasks nil))
+;(after! org (setq org-habit-show-habits t
+;                  org-treat-insert-todo-heading-as-state-change t
+;                  org-log-into-drawer t
+;                  org-agenda-dim-blocked-tasks nil))
 
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 (after! mu4e
@@ -287,6 +297,10 @@
   (mu4e-alert-set-default-style 'libnotify)
   (add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
   (add-hook 'after-init-hook #'mu4e-alert-enable-mode-line-display))
+
+;; (use-package! pinentry
+;;         :init (setq epa-pinentry-mode `loopback)
+;;                (pinentry-start))
 
 ;;;;; Documentation
 (custom-set-variables

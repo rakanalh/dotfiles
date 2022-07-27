@@ -22,12 +22,12 @@
 
 (package! rust-playground)
 
-(package! org-present)
+;; (package! org-present)
 
-(package! mu4e-dashboard
-  :recipe (:host github :repo "rougier/mu4e-dashboard"))
+;;(package! mu4e-dashboard
+;;  :recipe (:host github :repo "rougier/mu4e-dashboard"))
 
-(package! mu4e-alert)
+;; (package! mu4e-alert)
 
 ;; (package! org-habit-plus
 ;;   :recipe (:host github :repo "oddious/org-habit-plus"))
@@ -41,6 +41,8 @@
   (:host github
    :repo "rakanalh/org-gtasks"
    :files ("org-gtasks.el")))
+
+; (package! pinentry)
 
 ;; (package!
 ;;  github-review

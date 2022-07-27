@@ -104,7 +104,7 @@ export LESS=FRSX
 export BROWSER=qutebrowser
 export EDITOR=emacs
 export PYOPEN_CMD=emacs
-export GIT_EDITOR="${EDITOR} -nw -Q"
+export GIT_EDITOR="vim"
 
 export JAVA_HOME="/usr/lib/jvm/default"
 #export ANDROID_HOME=/home/rakan/Library/Android/sdk/
@@ -176,7 +176,7 @@ alias tree="exa -T"
 # alias grep="rg"
 # alias find="fd"
 
-unset SSH_AGENT_PID
-if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-fi
+GPG_TTY=$(tty)
+export GPG_TTY
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent

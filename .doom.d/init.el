@@ -8,6 +8,9 @@
 ;; More information about these modules (and what flags they support) can be
 ;; found in modules/README.org.
 (setq native-comp-deferred-compilation t)
+
+(when noninteractive
+  (add-to-list 'doom-env-whitelist "^SSH_"))
 (doom! :input
        ;;chinese
        ;;japanese
@@ -79,7 +82,7 @@
        ;;ansible
        (debugger +lsp)          ; FIXME stepping through code, to help you add bugs
        ;;direnv
-       ;;docker
+       docker
        editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)

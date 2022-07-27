@@ -19,19 +19,24 @@ yay --save --nocleanmenu --nodiffmenu
 
 # Install System Dependencies
 yay -S \
-  autojump \
   acpi_call \
   blueman \
   bluez \
   bluez-utils \
   ccid \
+  cmake \
+  clang \
   dbus-broker \
   htop \
   hopenpgp-tools \
   libfido2 \
   lxappearance \
+  mpd \
+  mpdris2 \
   ntfs-3g \
   nvidia-settings \
+  networkmanager \
+  network-manager-applet \
   oh-my-zsh-git \
   openssh \
   pam-u2f \
@@ -43,13 +48,7 @@ yay -S \
   udiskie \
   vim \
   wget \
-  xf86-video-intel \
-  yubikey-manager \
-  yubico-pam \
-  yubikey-personalization \
-  zsh \
-  zsh-syntax-highlighting \
-  zsh-autosuggestions 
+  xf86-video-intel
 
 # Install fonts
 yay -S \
@@ -67,28 +66,54 @@ yay -S \
   adwaita-icon-theme \
   arc-gtk-theme \
   arc-icon-theme \
+  autojump \
   bat \
   deepin-calculator \
+  deepin-camera \
   deepin-screenshot \
+  deepin-image-viewer \
+  deepin-reader \
+  deepin-editor \
   exa \
   element-desktop \
+  evince \
+  feh \
+  file-roller \
   firefox \
   fzf \
+  ffmpegthumbnailer \
+  gimp \
   gnupg \
   google-chrome \
+  gparted
+  imagemagick \
   i3lock-fancy \
+  libgfs \
   ledger-live-bin \
+  mpv \
+  openra \
   pcmanfm \
   pavucontrol \
+  plex-media-server \
+  qtpass \
+  ripgrep \
   rofi \
   rofi-pass \
   rofi-calc \
   stow \
-  slack \
+  slack-desktop \
+  the_silver_searcher \
   telegram-desktop \
   transmission-gtk \
   tmux \
-  zoom 
+  vlc \
+  yubikey-manager \
+  yubico-pam \
+  yubikey-personalization \
+  zoom \
+  zsh \
+  zsh-syntax-highlighting \
+  zsh-autosuggestions 
 
 # Install Python
 yay -S python39 python-virtualenv libffi libsrtp
@@ -129,6 +154,11 @@ if [ "${dbusbroker_status}" != "enabled" ]; then
   sudo systemctl enable dbus-broker.service
 fi
 
+plex_status=$(systemctl is-enabled plexmediaserver.service)
+if [ "${plex_status}" != "enabled" ]; then
+  sudo systemctl enable plexmediaserver.service
+fi
+
 # Other
 if [ ! -f "/usr/bin/vi" ]; then
   sudo ln -s /usr/bin/vim /usr/bin/vi
@@ -156,6 +186,9 @@ if ! command -v rustup &> /dev/null; then
   rustup target add wasm32-unknown-unknown --toolchain nightly
   cargo install cargo-remote
 fi
+
+xset -dpms
+xset s off
 
 # https://wiki.archlinux.org/title/Bluetooth#Auto_power-on_after_boot/resume
 # https://wiki.archlinux.org/title/Bluetooth#PulseAudio
