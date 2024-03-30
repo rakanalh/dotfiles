@@ -53,7 +53,6 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 plugins=(
   git
   autojump
-  zsh-autosuggestions
   fzf
 )
 
@@ -106,8 +105,6 @@ export EDITOR=emacs
 export PYOPEN_CMD=emacs
 export GIT_EDITOR="vim"
 
-export JAVA_HOME="/usr/lib/jvm/default"
-#export ANDROID_HOME=/home/rakan/Library/Android/sdk/
 export PROJECT_HOME=$HOME/Code/Python/
 export GOPATH=$HOME/Code/Go
 
@@ -167,9 +164,6 @@ function cleanpycs() {
   find . -name "*.pyc" -exec rm -rf {} \;
 }
 
-alias raiden-testnet='raiden --accept-disclaimer --keystore-path ~/.ethereum/testnet/keystore/ --log-config "raiden.raiden_service:DEBUG,raiden.blockchain_events_handler:DEBUG,raiden.network.proxies.token_network:DEBUG" $@'
-alias raiden-local='raiden --accept-disclaimer --network-id 4555 --keystore-path ../LocalGeth/data/keystore --registry-contract-address "0x90845Eb9bB31EE5C20e3776117BAb33582a4f823" --discovery-contract-address "0x4410bd7E4682a51358FCa06307470f987c0156d9" --secret-registry-contract-address "0x77487673F3dCE2810202b2c90613CdCb284c0103" --no-sync-check --log-config "raiden.raiden_service:DEBUG,raiden.blockchain_events_handler:DEBUG,raiden.network.proxies.token_network:DEBUG"y'
-
 alias cat="bat"
 alias ls="exa"
 alias tree="exa -T"
@@ -180,3 +174,8 @@ GPG_TTY=$(tty)
 export GPG_TTY
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
+
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+
+source ~/.zshenv
+eval "$(starship init zsh)"
