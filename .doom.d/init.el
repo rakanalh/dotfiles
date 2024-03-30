@@ -9,8 +9,9 @@
 ;; found in modules/README.org.
 (setq native-comp-deferred-compilation t)
 
-(when noninteractive
-  (add-to-list 'doom-env-whitelist "^SSH_"))
+;;(when noninteractive
+;; (add-to-list 'doom-env-whitelist "^SSH_"))
+
 (doom! :input
        ;;chinese
        ;;japanese
@@ -92,7 +93,7 @@
        (lsp +peek)
        ;;macos             ; MacOS-specific commands
        (magit +forge)             ; a git porcelain for Emacs
-       ;;make              ; run make tasks from Emacs
+       make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
        ;;pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders

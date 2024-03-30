@@ -36,11 +36,11 @@
 
 (package! google-translate)
 
-(package! org-gtasks
-  :recipe
-  (:host github
-   :repo "rakanalh/org-gtasks"
-   :files ("org-gtasks.el")))
+; (package! org-gtasks
+;   :recipe
+;   (:host github
+;    :repo "rakanalh/org-gtasks"
+;    :files ("org-gtasks.el")))
 
 ; (package! pinentry)
 
