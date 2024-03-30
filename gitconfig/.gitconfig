@@ -4,7 +4,7 @@
 [user]
   name = Rakan Alhneiti
   email = rakan.alhneiti@gmail.com
-	signingkey = E565B55AACE73E69DBAE87C89981A6DBFDC453AE
+  signingkey = E565B55AACE73E69DBAE87C89981A6DBFDC453AE
 
 [color]
   ui = auto
