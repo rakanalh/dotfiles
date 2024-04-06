@@ -9,8 +9,7 @@
 ;; found in modules/README.org.
 (setq native-comp-deferred-compilation t)
 
-;;(when noninteractive
-;; (add-to-list 'doom-env-whitelist "^SSH_"))
+(doom-load-envvars-file "~/.config/doom/env")
 
 (doom! :input
        ;;chinese
@@ -137,14 +136,9 @@
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org              ; organize your plain life in plain text
-        +brain
         +dragndrop       ; drag & drop files/images into org buffers
         ;;+hugo            ; use Emacs for hugo blogging
-        +ipython         ; ipython/jupyter support for babel
         +journal
-        +pandoc          ; export-with-pandoc support
-        +pomodoro        ; be fruitful with the tomato technique
-        +present         ; using org-mode for presentations
         +roam)
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother

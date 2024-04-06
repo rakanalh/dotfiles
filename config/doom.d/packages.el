@@ -32,17 +32,17 @@
 ;; (package! org-habit-plus
 ;;   :recipe (:host github :repo "oddious/org-habit-plus"))
 
-(package! protobuf-mode)
+;; (package! protobuf-mode)
 
-(package! google-translate)
+;; (package! google-translate)
 
-; (package! org-gtasks
-;   :recipe
-;   (:host github
-;    :repo "rakanalh/org-gtasks"
-;    :files ("org-gtasks.el")))
+;; (package! org-gtasks
+;;   :recipe
+;;   (:host github
+;;    :repo "rakanalh/org-gtasks"
+;;    :files ("org-gtasks.el")))
 
-; (package! pinentry)
+;; (package! pinentry)
 
 ;; (package!
 ;;  github-review
@@ -53,3 +53,6 @@
 
 ;; (unpin! rustic lsp-mode lsp-ui)
 ;; (unpin! magit forge gitconfig-mode)
+
+(package! git-auto-commit-mode)
+(package! org-modern)
