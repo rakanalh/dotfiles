@@ -43,6 +43,7 @@
 (after! org
   (setq org-directory "~/Documents/org"
         org-roam-directory "~/Documents/org/roam"
+        org-roam-db-location "~/Documents/org/roam/org-roam.db"
         org-modern-label-border nil
         org-roam-db-update-on-save t)
   (global-org-modern-mode)
@@ -53,10 +54,12 @@
     `(org-level-3 :inherit outline-3 :height 1.2)
     `(org-level-2 :inherit outline-2 :height 1.5)
     `(org-level-1 :inherit outline-1 :height 1.75)
-    `(org-document-title  :height 2.0 :underline nil)))
+    `(org-document-title  :height 2.0 :underline nil))
 
-;; Org-Roam
-(after! org-roam
+  ;; Org-Roam
+  (defun my/date (&optional n)
+    (unless n (setq n 1)) ; default is +1
+    (format-time-string "%Y-%m-%d" (time-add (* n 86400) (current-time))))
   (setq org-roam-dailies-capture-templates
         '(
           ("t" "todo" entry
@@ -64,7 +67,7 @@
            :target
            (file+head+olp
             "%<%Y-%m-%d>.org"
-            "%<%Y-%m-%d>\n\n[[elisp:org-roam-dailies-find-yesterday][Yesterday]] | [[elisp:org-roam-dailies-find-tomorrow][Tomorrow]]\n\n-----\n\n"
+            "%<%Y-%m-%d>\n\n[[file:%(concat (my/date -1) \".org\")][Yesterday]] | [[file:%(concat (my/date) \".org\")][Tomorrow]]\n\n-----\n\n"
             ("⏱ Today's tasks"))
            :empty-lines 1
            :unnarrowed t
