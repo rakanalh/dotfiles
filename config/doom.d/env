@@ -66,4 +66,5 @@
  "LSCOLORS=Gxfxcxdxbxegedabagacad"
  "SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh"
  "SHELL=/usr/bin/zsh"
+ "RA_MUX_SERVER=/home/rakan/.cargo/bin/rust-analyzer"
  )

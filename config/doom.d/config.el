@@ -164,7 +164,7 @@
    lsp-ui-sideline-show-diagnostics t
    lsp-ui-sideline-code-actions-prefix " "
    lsp-rust-server 'rust-analyzer
-   lsp-rust-analyzer-server-command "~/.cargo/bin/rust-analyzer"
+   lsp-rust-analyzer-server-command "~/.cargo/bin/ra-multiplex"
    lsp-rust-analyzer-cargo-watch-enable nil
    )
   ;; (setq lsp-rust-rustfmt-bin (expand-file-name "~/.cargo/bin/gitfmt"))
@@ -214,7 +214,7 @@
                            "magenta3"
                            "cyan3"
                            "white"]
-        rustic-analyzer-command '("~/.cargo/bin/rust-analyzer"))
+        rustic-analyzer-command '("~/.cargo/bin/ra-multiplex"))
 
   (add-hook 'rustic-mode-hook #'cargo-minor-mode)
 
