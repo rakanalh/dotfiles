@@ -22,6 +22,10 @@
 
 (package! rust-playground)
 
+(package! org-super-agenda)
+
+(package! olivetti)
+
 ;; (package! org-present)
 
 ;;(package! mu4e-dashboard

@@ -42,11 +42,53 @@
 ;; Org mode
 (after! org
   (setq org-directory "~/Documents/org"
+        org-agenda-files (directory-files-recursively "~/Documents/org/" "\\.org$")
+        org-agenda-current-time-string ""
+        org-agenda-time-grid '((daily) () "" "")
+        org-agenda-prefix-format
+        '((agenda . "  %?-2i %t ")
+          (todo . " %i %-12:c")
+          (tags . " %i %-12:c")
+          (search . " %i %-12:c"))
+        ;;------ Org agenda configuration ------;;;
+        ;; Set span for agenda to be just daily
+        org-agenda-span 1
+        org-agenda-start-day "+0d"
+        org-agenda-skip-timestamp-if-done t
+        org-agenda-skip-deadline-if-done t
+        org-agenda-skip-scheduled-if-done t
+        org-agenda-skip-scheduled-if-deadline-is-shown t
+        org-agenda-skip-timestamp-if-deadline-is-shown t
+        org-agenda-category-icon-alist
+        `(("Development" ,(list (nerd-icons-codicon "nf-cod-code" :height 0.8)) nil nil :ascent center)
+          ("Family" ,(list (nerd-icons-codicon "nf-cod-home" :v-adjust 0.005)) nil nil :ascent center)
+          ("Knowledge" ,(list (nerd-icons-codicon "nf-cod-database" :height 0.8)) nil nil :ascent center)
+          ("Personal" ,(list (nerd-icons-octicon "nf-oct-feed_person" :height 0.9)) nil nil :ascent center)
+          ("Work" ,(list (nerd-icons-octicon "nf-oct-codespaces" :height 0.9)) nil nil :ascent center)
+          )
+        org-super-agenda-groups
+        '(;; Each group has an implicit boolean OR operator between its selectors.
+          (:name " Overdue "  ; Optionally specify section name
+           :scheduled past
+           :order 2
+           :face 'error)
+          (:name "Personal "
+           :file-path "roam/daily"
+           :order 3)
+          (:name "Work "
+           :file-path "Work/"
+           :order 3)
+          (:name " Today "  ; Optionally specify section name
+           :time-grid t
+           :date today
+           :scheduled today
+           :order 1
+           :face 'warning)
+          )
         org-roam-directory "~/Documents/org/roam"
         org-roam-db-location "~/Documents/org/roam/org-roam.db"
         org-modern-label-border nil
         org-roam-db-update-on-save t)
-  (global-org-modern-mode)
   (custom-theme-set-faces! 'doom-tomorrow-night
     `(flycheck-posframe-background-face :background ,(doom-darken 'grey 0.4))
     `(flycheck-posframe-error-face   :inherit 'flycheck-posframe-face :foreground red)
@@ -56,6 +98,16 @@
     `(org-level-1 :inherit outline-1 :height 1.75)
     `(org-document-title  :height 2.0 :underline nil))
 
+  ;; Custom styles for dates in agenda
+  (custom-set-faces!
+    '(org-agenda-date :inherit outline-1 :height 1.15)
+    '(org-agenda-date-today :inherit diary :height 1.15)
+    '(org-agenda-date-weekend :ineherit outline-2 :height  1.15)
+    '(org-agenda-date-weekend-today :inherit outline-4 :height 1.15)
+    '(org-super-agenda-header :inherit custom-button :weight bold :height 1.05)
+    `(link :foreground unspecified :underline nil :background ,(nth 1 (nth 7 doom-themes--colors)))
+    '(org-link :foreground unspecified)
+    )
   ;; Org-Roam
   (defun my/date (&optional n)
     (unless n (setq n 1)) ; default is +1
@@ -85,6 +137,16 @@
            )
           )
         )
+  ;; Function to be run when org-agenda is opened
+  (defun org-agenda-open-hook ()
+    "Hook to be run when org-agenda is opened"
+    (olivetti-mode)
+    (if (= text-scale-mode-amount 0)
+        (text-scale-adjust 3)))
+
+  ;; Adds hook to org agenda mode, making follow mode active in org agenda
+  (add-hook 'org-agenda-mode-hook #'org-agenda-open-hook)
+
   (map! :leader
         :prefix "n"
         :desc "Capture for today"
@@ -93,7 +155,15 @@
         :prefix "n"
         :desc "Todo list"
         "T" #'org-todo-list)
+
+  (global-org-modern-mode)
+  (org-super-agenda-mode t)
   )
+
+(after! olivetti
+  (setq olivetti-style 'fancy
+      olivetti-margin-width 300)
+  (setq-default olivetti-body-width 100))
 
 ;; Projectile
 (after! projectile
@@ -103,8 +173,8 @@
         projectile-sort-order 'recently-active
         counsel-projectile-sort-buffers t
         counsel-projectile-sort-projects t)
-        ;;counsel-projectile-sort-files t
-        ;;counsel-projectile-sort-directories t)
+  ;;counsel-projectile-sort-files t
+  ;;counsel-projectile-sort-directories t)
 
   (require 'f)
   (defun my-projectile-ignore-project (project-root)
