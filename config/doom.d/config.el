@@ -162,7 +162,7 @@
 
 (after! olivetti
   (setq olivetti-style 'fancy
-      olivetti-margin-width 300)
+        olivetti-margin-width 300)
   (setq-default olivetti-body-width 100))
 
 ;; Projectile
