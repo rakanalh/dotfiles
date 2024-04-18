@@ -5,7 +5,7 @@
 ;;;;; EMACS
 
 (load-theme 'doom-tomorrow-night t)
-(setq doom-font (font-spec :family "Hack" :size 10))
+(setq doom-font (font-spec :family "Hack" :size 12))
 (custom-theme-set-faces! 'doom-tomorrow-night
   `(flycheck-posframe-background-face :background ,(doom-darken 'grey 0.4))
   `(flycheck-posframe-error-face   :inherit 'flycheck-posframe-face :foreground red)
