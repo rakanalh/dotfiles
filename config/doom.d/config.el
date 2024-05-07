@@ -172,17 +172,17 @@
         projectile-indexing-method 'native
         projectile-sort-order 'recently-active
         counsel-projectile-sort-buffers t
-        counsel-projectile-sort-projects t)
-  ;;counsel-projectile-sort-files t
-  ;;counsel-projectile-sort-directories t)
+        counsel-projectile-sort-projects t
+        counsel-projectile-sort-files nil
+        counsel-projectile-sort-directories t)
 
   (require 'f)
   (defun my-projectile-ignore-project (project-root)
     (or
      (f-descendant-of? project-root (expand-file-name "~/.cargo/git"))
      (f-descendant-of? project-root (expand-file-name "~/.cargo/registry"))
-     (f-descendant-of? project-root (expand-file-name "~/.rustup")))
-    (setq projectile-ignored-project-function #'my-projectile-ignore-project)))
+     (f-descendant-of? project-root (expand-file-name "~/.rustup"))))
+  (setq projectile-ignored-project-function #'my-projectile-ignore-project))
 
 
 ;;; WHITESPACE MODE
