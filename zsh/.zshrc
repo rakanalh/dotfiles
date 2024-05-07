@@ -104,6 +104,7 @@ export BROWSER=qutebrowser
 export EDITOR=emacs
 export PYOPEN_CMD=emacs
 export GIT_EDITOR="vim"
+export GTK_THEME=Adwaita:dark
 
 export PROJECT_HOME=$HOME/Code/Python/
 export GOPATH=$HOME/Code/Go
