@@ -60,3 +60,7 @@
 
 (package! git-auto-commit-mode)
 (package! org-modern)
+
+(unpin! lsp-mode)
+(unpin! rustic)
+(unpin! rust-mode)

@@ -5,7 +5,10 @@
 ;;;;; EMACS
 
 (load-theme 'doom-tomorrow-night t)
+
 (setq doom-font (font-spec :family "Hack" :size 12))
+(setq gc-cons-threshold 100000000)
+
 (custom-theme-set-faces! 'doom-tomorrow-night
   `(flycheck-posframe-background-face :background ,(doom-darken 'grey 0.4))
   `(flycheck-posframe-error-face   :inherit 'flycheck-posframe-face :foreground red)
@@ -169,12 +172,12 @@
 (after! projectile
   (setq projectile-enable-caching t
         projectile-completion-system 'ivy
-        projectile-indexing-method 'native
+        projectile-indexing-method 'alien
         projectile-sort-order 'recently-active
-        counsel-projectile-sort-buffers t
-        counsel-projectile-sort-projects t
+        counsel-projectile-sort-buffers nil
+        counsel-projectile-sort-projects nil
         counsel-projectile-sort-files nil
-        counsel-projectile-sort-directories t)
+        counsel-projectile-sort-directories nil)
 
   (require 'f)
   (defun my-projectile-ignore-project (project-root)
