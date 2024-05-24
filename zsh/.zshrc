@@ -100,15 +100,13 @@ export TERM=xterm-256color
 export IGNOREEOF=1
 export LESS=FRSX
 
-export BROWSER=qutebrowser
+export BROWSER=firefox
 export EDITOR=emacs
 export PYOPEN_CMD=emacs
-export GIT_EDITOR="vim"
+export GIT_EDITOR="emacs"
 export GTK_THEME=Adwaita:dark
 
-export PROJECT_HOME=$HOME/Code/Python/
 export GOPATH=$HOME/Code/Go
-
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/go/bin:/opt/sm/bin:/opt/sm/pkg/active/bin:/opt/sm/pkg/active/sbin:$GOROOT/bin:$GOPATH/bin:$HOME/.bin:$HOME/.cargo/bin"
 
 # python
@@ -119,36 +117,39 @@ export WORKON_HOME="$HOME/.pyvenvs"
 # Other
 export DISABLE_AUTO_TITLE='true'
 
-alias ls='ls --color=auto'
-
+# Emacs
 alias emacs="/usr/bin/emacs"
-alias ip1="ipconfig getifaddr en0"
-alias ip2="ipconfig getifaddr en1"
-
-alias docker-stop-all="docker stop \$(docker ps -a -q)"
-alias docker-remove-all="docker rm \$(docker ps -a -q)"
-alias docker-update-all="docker images | awk '{print $1}' | xargs -L1 docker pull"
-
 alias e="emacsclient -t -a ''"
 alias emacsbare="emacs -nw -Q"
 alias eb="emacsbare"
 alias ec="e"
 
-alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
+# Networking
+alias ip1="ipconfig getifaddr en0"
+alias ip2="ipconfig getifaddr en1"
 
+# Docker
+alias docker-stop-all="docker stop \$(docker ps -a -q)"
+alias docker-remove-all="docker rm \$(docker ps -a -q)"
+alias docker-update-all="docker images | awk '{print $1}' | xargs -L1 docker pull"
+
+# Arch
+alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
 alias backlight="dbus-send --system --type=method_call  --dest=\"org.freedesktop.UPower\" \"/org/freedesktop/UPower/KbdBacklight\" \"org.freedesktop.UPower.KbdBacklight.SetBrightness\" int32:$@"
 
-# setup the main ls alias if we've established common args
+# Tools
 alias ls="command ls -hBG"
-
 alias ..='cd ..'
-
 alias edit='$EDITOR $@'
-
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
-
 alias vag='vagrant $@'
 alias vi='vim'
+alias cat="bat"
+alias ls="exa"
+alias tree="exa -T"
+# alias grep="rg"
+# alias find="fd"
+alias cd="z"
 
 source /usr/bin/virtualenvwrapper.sh
 
@@ -165,12 +166,6 @@ function cleanpycs() {
   find . -name "*.pyc" -exec rm -rf {} \;
 }
 
-alias cat="bat"
-alias ls="exa"
-alias tree="exa -T"
-# alias grep="rg"
-# alias find="fd"
-
 GPG_TTY=$(tty)
 export GPG_TTY
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
@@ -181,3 +176,4 @@ export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 source ~/.zshenv
 eval "$(starship init zsh)"
 eval "$(atuin init zsh)"
+eval "$(zoxide init zsh)"
