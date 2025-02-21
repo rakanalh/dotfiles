@@ -6,7 +6,7 @@
 
 (load-theme 'doom-tomorrow-night t)
 
-(setq doom-font (font-spec :family "Hack" :size 12))
+(setq doom-font (font-spec :family "Fira Code Retina" :size 12))
 (setq gc-cons-threshold 100000000)
 
 (custom-theme-set-faces! 'doom-tomorrow-night
@@ -25,6 +25,8 @@
       evil-split-window-below t
       evil-vsplit-window-right t
       ivy-xref-use-file-path t)
+
+(show-smartparens-mode)
 
 ;;; WINDOWS
 (map! :leader
@@ -227,6 +229,11 @@
    lsp-auto-guess-root nil
    lsp-enable-file-watchers nil
    lsp-completion-enable t
+   ;; lsp-rust-analyzer-diagnostics-enable t
+   ;; lsp-rust-analyzer-cargo-watch-command "clippy"
+   ;; lsp-rust-analyzer-cargo-override-command ["cargo", "clippy", "--message=format=json"]
+   ;; lsp-rust-analyzer-cargo-extra-env ["SKIP_GUEST_BUILD=1"]
+   ;; lsp-diagnostic-clean-after-change t
    lsp-enable-imenu t
    lsp-headerline-breadcrumb-enable t
    lsp-log-io nil
@@ -240,7 +247,16 @@
    lsp-ui-sideline-show-diagnostics t
    lsp-ui-sideline-code-actions-prefix " "
    lsp-rust-server 'rust-analyzer
+   lsp-rust-analyzer-cargo-run-build-scripts nil
    lsp-rust-analyzer-cargo-watch-enable nil
+   lsp-rust-analyzer-display-chaining-hints t
+   lsp-rust-analyzer-closure-return-type-hints t
+   lsp-rust-analyzer-display-closure-return-type-hints t
+   lsp-rust-analyzer-display-parameter-hints t
+   lsp-rust-analyzer-expression-adjustment-hints "never"
+   lsp-rust-analyzer-checkonsave-features "all"
+   lsp-rust-clippy-preference "on"
+   lsp-rust-proc-macro-enable t
    )
   ;; (setq lsp-rust-rustfmt-bin (expand-file-name "~/.cargo/bin/gitfmt"))
   ;; (setq lsp-rust-analyzer-cargo-watch-command "check")
@@ -288,9 +304,9 @@
                            "SlateGray1"
                            "magenta3"
                            "cyan3"
-                           "white"]
+                           "white"])
 
-        rustic-analyzer-command '("rustup" "run" "stable" "rust-analyzer"))
+  ;; rustic-analyzer-command '("~/.config/emacs/bin/rust-analyzer.sh"))
 
   (add-hook 'rustic-mode-hook #'cargo-minor-mode)
 
