@@ -1,3 +1,5 @@
+source ~/.zshenv
+
 # Path to your oh-my-zsh installation.
 export ZSH=/usr/share/oh-my-zsh
 
@@ -52,7 +54,6 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  autojump
   fzf
 )
 
@@ -73,49 +74,6 @@ stty -ixon
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
-
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-export TERM=xterm-256color
-
-# export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
-
-export IGNOREEOF=1
-export LESS=FRSX
-
-export BROWSER=firefox
-export EDITOR=emacs
-export PYOPEN_CMD=emacs
-export GIT_EDITOR="emacs"
-export GTK_THEME=Adwaita:dark
-
-export GOPATH=$HOME/Code/Go
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/go/bin:/opt/sm/bin:/opt/sm/pkg/active/bin:/opt/sm/pkg/active/sbin:$GOROOT/bin:$GOPATH/bin:$HOME/.bin:$HOME/.cargo/bin"
-
-# python
-export PYTHONDONTWRITEBYTECODE=1
-export PYTHONSTARTUP="$HOME/.pythonrc.py"
-export WORKON_HOME="$HOME/.pyvenvs"
-
-# Other
-export DISABLE_AUTO_TITLE='true'
 
 # Emacs
 alias emacs="/usr/bin/emacs"
@@ -143,7 +101,7 @@ alias ..='cd ..'
 alias edit='$EDITOR $@'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias vag='vagrant $@'
-alias vi='vim'
+alias vi='nvim'
 alias cat="bat"
 alias ls="exa"
 alias tree="exa -T"
@@ -173,7 +131,13 @@ gpgconf --launch gpg-agent
 
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
-source ~/.zshenv
 eval "$(starship init zsh)"
 eval "$(atuin init zsh)"
 eval "$(zoxide init zsh)"
+
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+# End Nix
+
