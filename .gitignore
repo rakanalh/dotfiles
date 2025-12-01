@@ -1,2 +1,11 @@
+# OS files
 .DS_Store
-.doom.d/.mypy_cache
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Claude files
+.claude/

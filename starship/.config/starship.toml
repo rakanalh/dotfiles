@@ -1,0 +1,150 @@
+# Starship Configuration
+# https://starship.rs/config/
+
+# Faster prompt - reduce timeouts
+command_timeout = 300
+scan_timeout = 20
+
+# Prompt format - clean single line
+format = """
+$directory\
+$git_branch\
+$git_status\
+$python\
+$rust\
+$nodejs\
+$golang\
+$docker_context\
+$cmd_duration\
+$line_break\
+$character"""
+
+# No extra newline before prompt
+add_newline = false
+
+# ════════════════════════════════════════════════════════════════════
+# PROMPT
+# ════════════════════════════════════════════════════════════════════
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold purple)"
+
+[line_break]
+disabled = false
+
+# ════════════════════════════════════════════════════════════════════
+# DIRECTORY
+# ════════════════════════════════════════════════════════════════════
+
+[directory]
+truncation_length = 4
+truncate_to_repo = true
+style = "bold cyan"
+read_only = " 🔒"
+home_symbol = "~"
+
+# Shorten common paths
+[directory.substitutions]
+"Documents" = "docs"
+"Downloads" = "dl"
+"Code" = "code"
+"Projects" = "proj"
+
+# ════════════════════════════════════════════════════════════════════
+# GIT
+# ════════════════════════════════════════════════════════════════════
+
+[git_branch]
+format = "[$symbol$branch(:$remote_branch)]($style) "
+symbol = "\uf418 "
+style = "bold purple"
+truncation_length = 30
+
+[git_status]
+disabled = true
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bold yellow"
+
+# ════════════════════════════════════════════════════════════════════
+# LANGUAGES
+# ════════════════════════════════════════════════════════════════════
+
+[python]
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+symbol = "\ue7a8 "
+style = "bold yellow"
+
+[rust]
+format = "[$symbol($version )]($style)"
+symbol = "\ue68b "
+style = "bold red"
+
+[nodejs]
+format = "[$symbol($version )]($style)"
+symbol = "\ue718 "
+style = "bold green"
+detect_files = ["package.json", ".nvmrc"]
+detect_folders = []
+detect_extensions = []
+
+[golang]
+format = "[$symbol($version )]($style)"
+symbol = "\ue627 "
+style = "bold cyan"
+
+# ════════════════════════════════════════════════════════════════════
+# TOOLS
+# ════════════════════════════════════════════════════════════════════
+
+[docker_context]
+format = "[$symbol$context]($style) "
+symbol = "\uf1d3 "
+style = "bold blue"
+only_with_files = true
+
+[cmd_duration]
+min_time = 2000
+format = "[$duration]($style) "
+style = "bold yellow"
+show_milliseconds = false
+
+# ════════════════════════════════════════════════════════════════════
+# DISABLED - not needed or too slow
+# ════════════════════════════════════════════════════════════════════
+
+[aws]
+disabled = true
+
+[azure]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[kubernetes]
+disabled = true
+
+[package]
+disabled = true
+
+[battery]
+disabled = true
+
+[time]
+disabled = true
+
+[username]
+disabled = true
+
+[hostname]
+disabled = true
+
+[git_metrics]
+disabled = true
+
+[git_commit]
+disabled = true
