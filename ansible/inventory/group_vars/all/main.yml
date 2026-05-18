@@ -1,0 +1,44 @@
+---
+# Core configuration variables for dotfiles automation
+
+# Dotfiles paths
+dotfiles_dir: "{{ lookup('env', 'HOME') }}/.dotfiles"
+dotfiles_backup_dir: "{{ lookup('env', 'HOME') }}/.dotfiles.backup.{{ ansible_date_time.epoch }}"
+
+# User configuration
+primary_user: "{{ lookup('env', 'USER') }}"
+primary_group: "{{ lookup('env', 'USER') }}"
+
+# System configuration
+default_shell: /usr/bin/zsh
+timezone: "America/New_York"  # Adjust as needed
+
+# Feature flags (enable/disable major components)
+# NOTE: Base system and KDE desktop are in Fedora ISO, so we skip those roles
+enable_nvidia: true  # Auto-detect in role, set to false to skip completely
+enable_development: true
+enable_editors: true
+enable_shell_tools: true
+enable_browsers: true
+enable_media: true
+enable_productivity: true
+enable_fonts: true
+enable_virtualization: true
+enable_networking: true
+enable_flatpak: true
+
+dev_rust_enabled: true
+dev_python_enabled: true
+dev_nodejs_enabled: true
+dev_cpp_enabled: true
+dev_containers_enabled: true
+
+# Package manager configuration
+dnf_conf:
+  max_parallel_downloads: 10
+  fastestmirror: true
+  deltarpm: true
+  install_weak_deps: false  # Don't install weak dependencies
+
+# Ansible logging
+ansible_log_path: /var/log/ansible-dotfiles.log

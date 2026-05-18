@@ -1,0 +1,71 @@
+---
+# Repositories role - Configure RPM Fusion, COPR, and third-party repos
+
+- name: Check if RPM Fusion Free is already installed
+  command: dnf repolist --enabled
+  register: repo_check
+  changed_when: false
+  tags: ['repos']
+
+- name: Install RPM Fusion Free
+  dnf:
+    name: "{{ rpmfusion_free_url }}"
+    state: present
+    disable_gpg_check: true
+  when: "'rpmfusion-free' not in repo_check.stdout"
+  tags: ['repos']
+
+- name: Install RPM Fusion Nonfree
+  dnf:
+    name: "{{ rpmfusion_nonfree_url }}"
+    state: present
+    disable_gpg_check: true
+  when: "'rpmfusion-nonfree' not in repo_check.stdout"
+  tags: ['repos']
+
+- name: Update repository metadata
+  dnf:
+    update_cache: yes
+  tags: ['repos']
+
+- name: Enable COPR repositories
+  community.general.copr:
+    name: "{{ item.name }}"
+    state: enabled
+  loop: "{{ copr_repos }}"
+  when: item.enabled | default(true)
+  tags: ['repos']
+
+- name: Add third-party repositories
+  yum_repository:
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    baseurl: "{{ item.baseurl }}"
+    gpgkey: "{{ item.gpgkey }}"
+    gpgcheck: "{{ item.gpgcheck }}"
+    enabled: "{{ item.enabled | default(true) }}"
+  loop: "{{ third_party_repos }}"
+  when: item.enabled | default(true)
+  tags: ['repos']
+
+- name: Import GPG keys for third-party repos
+  rpm_key:
+    key: "{{ item.gpgkey }}"
+    state: present
+  loop: "{{ third_party_repos }}"
+  when: item.enabled | default(true) and item.gpgcheck | default(true)
+  tags: ['repos']
+
+- name: Final repository metadata update
+  dnf:
+    update_cache: yes
+  tags: ['repos']
+
+- name: Display configured repositories
+  debug:
+    msg: |
+      Repositories configured successfully:
+      - RPM Fusion (Free & Nonfree)
+      - COPR repos: {{ copr_repos | selectattr('enabled') | map(attribute='name') | list | join(', ') }}
+      - Third-party: {{ third_party_repos | selectattr('enabled', 'defined') | selectattr('enabled') | map(attribute='name') | list | join(', ') }}
+  tags: ['repos']

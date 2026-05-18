@@ -1,0 +1,58 @@
+---
+# Prerequisites role - System checks and validation
+
+- name: Verify running on Fedora
+  assert:
+    that:
+      - ansible_distribution == "Fedora"
+    fail_msg: "This playbook requires Fedora Linux"
+  tags: always
+
+- name: Verify Fedora version
+  assert:
+    that:
+      - ansible_distribution_version is version('43', '>=')
+    fail_msg: "This playbook requires Fedora 43 or later (found: {{ ansible_distribution_version }})"
+  tags: always
+
+- name: Check DNF5 is available
+  command: dnf5 --version
+  register: dnf5_check
+  changed_when: false
+  failed_when: false
+  tags: always
+
+- name: Display DNF version
+  debug:
+    msg: "DNF version: {{ dnf5_check.stdout_lines | first if (dnf5_check.rc == 0 and dnf5_check.stdout_lines | length > 0) else 'DNF5 not available, using legacy DNF' }}"
+  tags: always
+
+- name: Check internet connectivity
+  uri:
+    url: https://download.fedoraproject.org
+    timeout: 10
+    status_code: [200, 301, 302]
+  register: connectivity_check
+  retries: 3
+  delay: 5
+  tags: always
+
+- name: Verify sufficient disk space
+  assert:
+    that:
+      - item.size_available > 5368709120  # 5GB minimum
+    fail_msg: "Insufficient disk space on {{ item.mount }} (need at least 5GB available)"
+  loop: "{{ ansible_mounts }}"
+  when: item.mount == '/'
+  tags: always
+
+- name: Display system information
+  debug:
+    msg: |
+      System Information:
+      - Distribution: {{ ansible_distribution }} {{ ansible_distribution_version }}
+      - Kernel: {{ ansible_kernel }}
+      - Architecture: {{ ansible_architecture }}
+      - Memory: {{ ansible_memtotal_mb }} MB
+      - CPU cores: {{ ansible_processor_vcpus }}
+  tags: always

@@ -1,0 +1,11 @@
+---
+- name: Load package variables
+  include_vars: packages.yml
+  tags: ['media']
+
+- name: Install media packages
+  dnf:
+    name: "{{ media_packages }}"
+    state: present
+  become: true
+  tags: ['media']

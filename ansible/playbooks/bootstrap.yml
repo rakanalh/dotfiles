@@ -1,0 +1,131 @@
+---
+# Main bootstrap playbook for Fedora workstation setup
+# Usage: ansible-playbook ansible/playbooks/bootstrap.yml [--tags TAG1,TAG2]
+#
+# Common tag combinations:
+#   --tags "all"                    # Everything
+#   --tags "shell,dotfiles"         # Minimal (shell tools + dotfiles)
+#   --tags "dev,editors,shell"      # Developer setup
+#   --skip-tags "nvidia"            # Skip NVIDIA drivers
+
+- name: Bootstrap Fedora Workstation with Dotfiles
+  hosts: localhost
+  connection: local
+  become: true  # Most tasks need sudo
+
+  vars_files:
+    - ../inventory/group_vars/all/main.yml
+    - ../inventory/group_vars/all/repos.yml
+    - ../inventory/group_vars/all/services.yml
+    - ../inventory/group_vars/all/flatpaks.yml
+
+  pre_tasks:
+    - name: Verify running on Fedora
+      assert:
+        that:
+          - ansible_distribution == "Fedora"
+          - ansible_distribution_version is version('43', '>=')
+        fail_msg: "This playbook requires Fedora 43 or later (found: {{ ansible_distribution }} {{ ansible_distribution_version }})"
+      tags: always
+
+    - name: Display bootstrap information
+      debug:
+        msg: |
+          ========================================
+          Fedora Workstation Bootstrap
+          ========================================
+          OS: {{ ansible_distribution }} {{ ansible_distribution_version }}
+          User: {{ primary_user }}
+          Dotfiles: {{ dotfiles_dir }}
+          Tags: {{ ansible_run_tags | join(', ') }}
+          ========================================
+      tags: always
+
+  roles:
+    - role: prerequisites
+      tags: ['always']
+
+    - role: repositories
+      tags: ['repos', 'always']
+
+    - role: nvidia-drivers
+      tags: ['nvidia', 'graphics']
+      when: enable_nvidia | default(true)
+
+    - role: development
+      tags: ['dev', 'development']
+      when: enable_development | default(true)
+
+    - role: editors
+      tags: ['editors', 'dev']
+      when: enable_editors | default(true)
+
+    - role: shell-tools
+      tags: ['shell', 'cli']
+      when: enable_shell_tools | default(true)
+
+    - role: browsers
+      tags: ['browsers', 'web']
+      when: enable_browsers | default(true)
+
+    - role: media
+      tags: ['media']
+      when: enable_media | default(true)
+
+    - role: productivity
+      tags: ['productivity']
+      when: enable_productivity | default(true)
+
+    - role: fonts
+      tags: ['fonts']
+      when: enable_fonts | default(true)
+
+    - role: virtualization
+      tags: ['virt', 'docker']
+      when: enable_virtualization | default(false)
+
+    - role: networking
+      tags: ['network']
+      when: enable_networking | default(true)
+
+    - role: flatpak
+      tags: ['flatpak']
+      when: enable_flatpak | default(true)
+
+    - role: systemd-services
+      tags: ['services']
+
+    - role: dotfiles
+      become: false
+      tags: ['dotfiles']
+
+  post_tasks:
+    - name: Display completion message
+      debug:
+        msg: |
+          ========================================
+          Bootstrap Complete!
+          ========================================
+
+          Installed components:
+          {{ ansible_run_tags | join(', ') }}
+
+          Next steps:
+          1. Review log: {{ ansible_log_path }}
+          2. Reboot if NVIDIA drivers were installed
+          3. Configure application-specific settings
+          4. Start new shell: source ~/.zshrc
+          ========================================
+      tags: always
+
+    - name: Check if reboot is required
+      stat:
+        path: /var/run/reboot-required
+      register: reboot_required
+      tags: always
+
+    - name: Notify if reboot needed
+      debug:
+        msg: "⚠️  REBOOT REQUIRED (NVIDIA drivers or kernel update)"
+      when: reboot_required.stat.exists
+      tags: always

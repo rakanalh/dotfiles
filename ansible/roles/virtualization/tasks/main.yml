@@ -1,0 +1,20 @@
+---
+- name: Load package variables
+  include_vars: packages.yml
+  tags: ['virt']
+
+- name: Install virtualization packages
+  dnf:
+    name: "{{ virtualization_packages }}"
+    state: present
+  become: true
+  tags: ['virt']
+
+- name: Add user to libvirt group
+  user:
+    name: "{{ primary_user }}"
+    groups: libvirt
+    append: yes
+  become: true
+  failed_when: false
+  tags: ['virt']

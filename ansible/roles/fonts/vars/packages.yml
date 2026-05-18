@@ -1,0 +1,10 @@
+---
+fonts_packages:
+  - fira-code-fonts
+  - adobe-source-code-pro-fonts
+  - mozilla-fira-mono-fonts
+  - mozilla-fira-sans-fonts
+  - google-noto-sans-fonts
+  - google-noto-emoji-fonts
+  - fontawesome-fonts
+  - fontawesome-fonts-web

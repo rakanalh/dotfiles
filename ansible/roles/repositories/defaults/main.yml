@@ -1,0 +1,5 @@
+---
+# Default variables for repositories role
+
+# Enable/disable repository setup
+repositories_enabled: true

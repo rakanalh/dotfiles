@@ -1,0 +1,52 @@
+---
+# Systemd service definitions
+
+# Services to enable based on installed roles
+systemd_services:
+  # Core services (usually already enabled by Fedora)
+  core:
+    - name: NetworkManager
+      enabled: true
+      state: started
+
+    - name: systemd-resolved
+      enabled: true
+      state: started
+
+    - name: sddm
+      enabled: true
+      state: started  # Display manager
+
+  # Development services
+  development:
+    - name: docker
+      enabled: "{{ dev_containers_enabled }}"
+      state: started
+      user_groups: ["docker"]  # Add primary_user to docker group
+
+  # Networking services
+  networking:
+    - name: tailscaled
+      enabled: "{{ enable_networking }}"
+      state: started
+
+    - name: sshd
+      enabled: false  # Disabled by default for security
+      state: stopped
+
+  # NVIDIA services
+  nvidia:
+    - name: nvidia-persistenced
+      enabled: "{{ enable_nvidia }}"
+      state: started
+
+  # Virtualization services
+  virtualization:
+    - name: libvirtd
+      enabled: "{{ enable_virtualization }}"
+      state: started
+
+# Services to explicitly disable (optional)
+disabled_services:
+  - cups  # Only enable if printing is needed
+  - bluetooth  # Only enable if Bluetooth devices are used

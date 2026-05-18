@@ -9,31 +9,31 @@ export LC_ALL=en_US.UTF-8
 # PATH
 # ══════════════════════════════════════════════════════════════════
 
-typeset -U path  # Remove duplicates
+typeset -U path # Remove duplicates
 
 path=(
-    $HOME/.local/bin
-    $HOME/.bin
-    $HOME/.cargo/bin
-    $HOME/.foundry/bin
-    $HOME/.risc0/bin
-    $HOME/.sp1/bin
-    $HOME/.claude/local
-    $HOME/.config/emacs/bin
-    $HOME/Code/Go/bin
-    /usr/local/go/bin
-    /usr/local/bin
-    /usr/local/git/bin
-    /usr/bin
-    /bin
-    /usr/sbin
-    /sbin
-    /var/lib/snapd/snap/bin
-    /etc/alternatives
-    /opt/sm/bin
-    /opt/sm/pkg/active/bin
-    /opt/sm/pkg/active/sbin
-    $path
+  $HOME/.local/bin
+  $HOME/.bin
+  $HOME/.cargo/bin
+  $HOME/.foundry/bin
+  $HOME/.risc0/bin
+  $HOME/.sp1/bin
+  $HOME/.claude/local
+  $HOME/.config/emacs/bin
+  $HOME/Code/Go/bin
+  /usr/local/go/bin
+  /usr/local/bin
+  /usr/local/git/bin
+  /usr/bin
+  /bin
+  /usr/sbin
+  /sbin
+  /var/lib/snapd/snap/bin
+  /etc/alternatives
+  /opt/sm/bin
+  /opt/sm/pkg/active/bin
+  /opt/sm/pkg/active/sbin
+  $path
 )
 
 export GOPATH=$HOME/Code/Go
@@ -75,7 +75,7 @@ export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 # API KEYS (loaded from pass on demand)
 # ══════════════════════════════════════════════════════════════════
 
-export OPENAI_API_KEY="$(pass show api/openai 2>/dev/null)"
+# export OPENAI_API_KEY="$(pass show api/openai 2>/dev/null)"
 
 # ══════════════════════════════════════════════════════════════════
 # MISC

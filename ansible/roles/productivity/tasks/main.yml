@@ -1,0 +1,11 @@
+---
+- name: Load package variables
+  include_vars: packages.yml
+  tags: ['productivity']
+
+- name: Install productivity packages
+  dnf:
+    name: "{{ productivity_packages }}"
+    state: present
+  become: true
+  tags: ['productivity']

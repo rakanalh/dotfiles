@@ -1,0 +1,39 @@
+---
+# Flatpak role - Install and manage Flatpak applications
+
+- name: Ensure Flatpak is installed
+  dnf:
+    name: flatpak
+    state: present
+  become: true
+  tags: ['flatpak']
+
+- name: Add Flathub remote
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: "{{ flathub_remote }}"
+  tags: ['flatpak']
+
+- name: Install Flatpak applications
+  community.general.flatpak:
+    name: "{{ item.id }}"
+    state: present
+    remote: flathub
+  loop: "{{ flatpak_apps }}"
+  tags: ['flatpak']
+
+- name: Update all Flatpak applications
+  command: flatpak update -y
+  register: flatpak_update
+  changed_when: "'Nothing to do' not in flatpak_update.stdout"
+  tags: ['flatpak', 'update']
+
+- name: Display installed Flatpak applications
+  debug:
+    msg: |
+      Flatpak applications installed successfully:
+      {{ flatpak_apps | map(attribute='name') | list | join(', ') }}
+
+      Run 'flatpak list --app' to see all installed applications
+  tags: ['flatpak']

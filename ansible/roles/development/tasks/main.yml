@@ -1,0 +1,83 @@
+---
+- name: Load package variables
+  include_vars: packages.yml
+  tags: ['dev', 'development']
+
+- name: Install development packages
+  dnf:
+    name: "{{ development_packages }}"
+    state: present
+  become: true
+  tags: ['dev', 'development']
+
+- name: Install Rust via rustup
+  include_tasks: rustup.yml
+  when: dev_rust_enabled | default(true)
+  tags: ['dev', 'rust']
+
+- name: Ensure docker group exists
+  group:
+    name: docker
+    state: present
+  become: true
+  failed_when: false
+  when: dev_containers_enabled | default(true)
+  tags: ['dev', 'development', 'docker']
+
+- name: Add user to docker group
+  user:
+    name: "{{ primary_user }}"
+    groups: docker
+    append: yes
+  become: true
+  failed_when: false
+  when: dev_containers_enabled | default(true)
+  tags: ['dev', 'development', 'docker']
+
+
+- name: Verify Python installations
+  command: "{{ item }} --version"
+  loop:
+    - python3
+    - python3.11
+    - python3.12
+  register: python_versions
+  changed_when: false
+  failed_when: false
+  when: dev_python_enabled | default(true)
+  tags: ['dev', 'development', 'python']
+
+- name: Verify Node.js installation
+  command: node --version
+  register: node_version
+  changed_when: false
+  failed_when: false
+  when: dev_nodejs_enabled | default(true)
+  tags: ['dev', 'development', 'nodejs']
+
+- name: Verify Docker installation
+  command: docker --version
+  register: docker_version
+  changed_when: false
+  failed_when: false
+  when: dev_containers_enabled | default(true)
+  tags: ['dev', 'development', 'docker']
+
+- name: Display development tools summary
+  debug:
+    msg: |
+      Development tools installed!
+
+      Language stacks:
+      - Rust: Installed via rustup (stable toolchain)
+      - Python: 3, 3.11, 3.12 with pip and virtualenv
+      - Node.js: {{ node_version.stdout if (dev_nodejs_enabled | default(true) and node_version is defined and node_version.rc == 0 and node_version.stdout | length > 0) else 'Pending installation' }}
+
+      Tools:
+      - Build tools: gcc, clang, cmake, ninja, make
+      - Containers: Docker CE, Podman, Buildah
+      - Version control: git, gh
+      - Databases: PostgreSQL, MariaDB, SQLite
+
+      Note: For Docker, run 'newgrp docker' or restart shell
+  tags: ['dev', 'development']

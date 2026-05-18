@@ -31,10 +31,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
-# KGoogleTasks environment
-source /home/rakan/.local/bin/kgoogletasks-env.sh
-export PYTHONPATH="/home/rakan/.local/share/qt6/qml/org/kde/plasma/private/kgoogletasks:$PYTHONPATH"
-
 export GOPATH=$HOME/Code/Go
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/go/bin:/opt/sm/bin:/opt/sm/pkg/active/bin:/opt/sm/pkg/active/sbin:/var/lib/snapd/snap/bin/:/etc/alternatives/:$HOME/.local/bin:$GOROOT/bin:$GOPATH/bin:$HOME/.bin:$HOME/.config/emacs/bin/:$HOME/.cargo/bin:/home/rakan/.foundry/bin:/home/rakan/.risc0/bin:/home/rakan/.claude/local"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)

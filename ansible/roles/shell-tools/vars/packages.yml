@@ -1,0 +1,76 @@
+---
+# Shell tools packages
+
+# Core shell enhancements
+shell_tools_core:
+  - zsh
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
+  - bash-completion
+
+# Shell prompt (from COPR: atim/starship)
+shell_tools_prompt:
+  - starship
+
+# Shell history management
+shell_tools_history:
+  - atuin
+
+# Modern CLI replacements
+shell_tools_modern:
+  - ripgrep     # Better grep (rg)
+  - fd-find     # Better find (fd)
+  - bat         # Better cat
+  - eza         # Better ls
+  - fzf         # Fuzzy finder
+  - zoxide      # Better cd
+
+# Terminal multiplexers
+shell_tools_multiplexers:
+  - tmux
+
+# File management
+shell_tools_files:
+  - tree        # Directory visualization
+  - file        # File type detection
+  - rsync       # File synchronization
+  - rclone      # Cloud storage sync
+
+# System monitoring
+shell_tools_monitoring:
+  - htop        # Interactive process viewer
+  - btop        # Modern htop alternative
+  - iotop       # I/O monitoring
+
+# Network tools
+shell_tools_network:
+  - nmap        # Network scanning
+  - netcat      # Network utility
+  - mtr         # Network diagnostic tool
+  - tcpdump     # Packet analyzer
+  - httpie      # HTTP client
+
+# Data tools
+shell_tools_data:
+  - jq          # JSON processor
+  - yq          # YAML processor
+
+# Terminal emulators (optional, might be installed separately)
+shell_tools_terminals:
+  - alacritty   # Already in stow package
+  # - ghostty   # From COPR: scottames/ghostty
+
+# Combined package list
+shell_tools_packages: >-
+  {{
+    shell_tools_core +
+    shell_tools_prompt +
+    shell_tools_history +
+    shell_tools_modern +
+    shell_tools_multiplexers +
+    shell_tools_files +
+    shell_tools_monitoring +
+    shell_tools_network +
+    shell_tools_data +
+    shell_tools_terminals
+  }}

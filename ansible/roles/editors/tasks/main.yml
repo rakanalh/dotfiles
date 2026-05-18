@@ -1,0 +1,28 @@
+---
+- name: Load package variables
+  include_vars: packages.yml
+  tags: ['editors']
+
+- name: Install editor packages
+  dnf:
+    name: "{{ editors_packages + editors_dependencies }}"
+    state: present
+  become: true
+  tags: ['editors']
+
+- name: Verify neovim installation
+  command: nvim --version
+  register: nvim_version
+  changed_when: false
+  failed_when: false
+  tags: ['editors']
+
+- name: Display editor summary
+  debug:
+    msg: |
+      Editors installed!
+      - Neovim: {{ nvim_version.stdout_lines | first if (nvim_version.rc == 0 and nvim_version.stdout_lines | length > 0) else 'Not yet installed (dry-run)' }}
+      - Emacs
+      - VS Code Insiders
+      - Vim Enhanced
+  tags: ['editors']

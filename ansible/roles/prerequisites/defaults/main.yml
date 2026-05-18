@@ -1,0 +1,6 @@
+---
+# Default variables for prerequisites role
+
+# Minimum required versions
+min_fedora_version: 43
+min_disk_space_gb: 5

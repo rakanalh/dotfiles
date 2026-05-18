@@ -1,0 +1,5 @@
+---
+# Default variables for flatpak role
+
+# Enable/disable flatpak installation
+flatpak_enabled: true

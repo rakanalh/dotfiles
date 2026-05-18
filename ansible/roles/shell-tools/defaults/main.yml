@@ -1,0 +1,8 @@
+---
+# Default variables for shell-tools role
+
+# Enable/disable shell tools installation
+shell_tools_enabled: true
+
+# Default shell to set (override in group_vars if needed)
+default_shell: /usr/bin/zsh

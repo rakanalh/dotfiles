@@ -1,3 +1,13 @@
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+fpath=("/home/rakan/.oh-my-zsh/custom/completions" $fpath)
+autoload -Uz compinit
+compinit
+# OPENSPEC:END
+
+# Exit early if non-interactive to avoid Claude Code issues
+[[ -o interactive ]] || return
+
 # ══════════════════════════════════════════════════════════════════
 # ZINIT
 # ══════════════════════════════════════════════════════════════════
@@ -31,8 +41,7 @@ zinit snippet OMZP::gh
 zinit snippet OMZP::npm
 zinit snippet OMZP::rust
 zinit snippet OMZP::ssh
-zinit snippet OMZP::tmux
-zinit snippet OMZP::zoxide
+[[ -o interactive ]] && zinit snippet OMZP::zoxide
 
 # Completions
 autoload -Uz compinit && compinit
@@ -43,6 +52,10 @@ zinit cdreplay -q
 # ══════════════════════════════════════════════════════════════════
 
 export DEFAULT_USER="rakan"
+
+# Make Alt-Backspace stop at path separators and hyphens
+WORDCHARS=${WORDCHARS/\//}
+WORDCHARS=${WORDCHARS/-/}
 
 unsetopt autocd
 stty -ixon
@@ -85,6 +98,9 @@ bindkey '^[w' kill-region
 bindkey '[C' forward-word
 bindkey '[D' backward-word
 bindkey '^U' backward-kill-line
+bindkey  "^[[H"   beginning-of-line
+bindkey  "^[[F"   end-of-line
+bindkey  "^[[3~"  delete-char
 
 # ══════════════════════════════════════════════════════════════════
 # ALIASES
@@ -115,7 +131,7 @@ alias vi="nvim"
 alias edit='$EDITOR $@'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias vag='vagrant $@'
-alias claude="~/.claude/local/claude"
+# alias claude="~/.claude/local/claude"
 alias tm="task-master"
 alias taskmaster="task-master"
 
@@ -153,6 +169,19 @@ export NVM_DIR="$HOME/.nvm"
 # Shell enhancements
 eval "$(starship init zsh)"
 eval "$(atuin init zsh)"
-eval "$(zoxide init zsh)"
+# Only initialize zoxide in interactive shells to avoid Claude Code issues
+[[ -o interactive ]] && eval "$(zoxide init zsh)"
 eval "$(direnv hook zsh)"
 eval "$(just --completions zsh)"
+
+# opencode
+export PATH=/home/rakan/.opencode/bin:$PATH
+
+# bun completions
+[ -s "/home/rakan/.bun/_bun" ] && source "/home/rakan/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+alias claude-mem='/home/rakan/.bun/bin/bun "/home/rakan/.claude/plugins/cache/thedotmack/claude-mem/10.5.3/scripts/worker-service.cjs"'

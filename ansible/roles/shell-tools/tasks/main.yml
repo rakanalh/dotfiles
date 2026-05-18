@@ -1,0 +1,47 @@
+---
+# Shell tools role - Install modern CLI utilities
+
+- name: Load package variables
+  include_vars: packages.yml
+  tags: ['shell', 'cli']
+
+- name: Install shell tools packages
+  dnf:
+    name: "{{ shell_tools_packages }}"
+    state: present
+  become: true
+  tags: ['shell', 'cli']
+
+- name: Verify zsh is installed
+  command: which zsh
+  register: zsh_check
+  changed_when: false
+  failed_when: zsh_check.rc != 0
+  tags: ['shell', 'cli']
+
+- name: Verify critical tools are available
+  command: which {{ item }}
+  loop:
+    - rg      # ripgrep
+    - fd      # fd-find
+    - bat
+    - fzf
+    - zoxide
+  register: tool_check
+  changed_when: false
+  failed_when: tool_check.rc != 0
+  tags: ['shell', 'cli']
+
+- name: Display installed shell tools
+  debug:
+    msg: |
+      Shell tools installed successfully:
+      - Modern CLI: ripgrep, fd-find, bat, eza, fzf, zoxide
+      - Multiplexers: tmux, zellij
+      - Monitoring: htop, btop
+      - Shell: zsh with autosuggestions and syntax-highlighting
+      - Prompt: starship
+      - History: atuin
+
+      Next: Run 'source ~/.zshrc' or start a new shell
+  tags: ['shell', 'cli']

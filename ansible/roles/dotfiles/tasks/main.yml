@@ -1,0 +1,97 @@
+---
+# Dotfiles role - Apply GNU Stow dotfiles and handle submodules
+
+- name: Ensure git is installed
+  dnf:
+    name: git
+    state: present
+  become: true
+  tags: ['dotfiles']
+
+- name: Ensure GNU Stow is installed
+  dnf:
+    name: stow
+    state: present
+  become: true
+  tags: ['dotfiles']
+
+- name: Check if dotfiles directory exists
+  stat:
+    path: "{{ dotfiles_dir }}"
+  register: dotfiles_stat
+  tags: ['dotfiles']
+
+- name: Fail if dotfiles directory not found
+  fail:
+    msg: "Dotfiles directory not found: {{ dotfiles_dir }}"
+  when: not dotfiles_stat.stat.exists
+  tags: ['dotfiles']
+
+- name: Initialize git submodules
+  command: git submodule update --init --recursive
+  args:
+    chdir: "{{ dotfiles_dir }}"
+  changed_when: false
+  tags: ['dotfiles']
+
+- name: Check submodule status
+  shell: git submodule status
+  args:
+    chdir: "{{ dotfiles_dir }}"
+  register: submodule_status
+  changed_when: false
+  tags: ['dotfiles']
+
+- name: Display submodule status
+  debug:
+    msg: "{{ submodule_status.stdout_lines }}"
+  tags: ['dotfiles']
+
+- name: Ensure .config directory exists
+  file:
+    path: "{{ ansible_env.HOME }}/.config"
+    state: directory
+    mode: '0755'
+  tags: ['dotfiles']
+
+- name: Run stow.sh to apply dotfiles
+  command: ./stow.sh
+  args:
+    chdir: "{{ dotfiles_dir }}"
+  register: stow_result
+  tags: ['dotfiles']
+
+- name: Display stow output
+  debug:
+    var: stow_result.stdout_lines
+  when: stow_result.stdout_lines | length > 0
+  tags: ['dotfiles']
+
+- name: Verify critical symlinks exist
+  stat:
+    path: "{{ ansible_env.HOME }}/{{ item }}"
+  register: symlink_check
+  loop:
+    - .zshrc
+    - .bashrc
+    - .config/nvim
+    - .config/starship/starship.toml
+  failed_when: not symlink_check.results[0].stat.exists
+  tags: ['dotfiles']
+
+- name: Display dotfiles summary
+  debug:
+    msg: |
+      Dotfiles applied successfully!
+
+      Symlinked configurations:
+      - Shell configs (zsh, bash)
+      - Neovim config (from submodule)
+      - Doom Emacs (from submodule)
+      - Starship prompt
+      - Git, tmux, alacritty, and other tools
+
+      Location: {{ dotfiles_dir }}
+
+      Start a new shell or run: source ~/.zshrc
+  tags: ['dotfiles']

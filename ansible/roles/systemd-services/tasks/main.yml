@@ -1,0 +1,40 @@
+---
+- name: Enable and start Docker service
+  systemd:
+    name: docker
+    enabled: yes
+    state: started
+  become: true
+  failed_when: false
+  when: dev_containers_enabled | default(true)
+  tags: ['services', 'docker']
+
+- name: Enable and start Tailscale service
+  systemd:
+    name: tailscaled
+    enabled: yes
+    state: started
+  become: true
+  failed_when: false
+  when: enable_networking | default(true)
+  tags: ['services', 'network']
+
+- name: Enable and start libvirtd service
+  systemd:
+    name: libvirtd
+    enabled: yes
+    state: started
+  become: true
+  failed_when: false
+  when: enable_virtualization | default(false)
+  tags: ['services', 'virt']
+
+- name: Enable NVIDIA persistence daemon
+  systemd:
+    name: nvidia-persistenced
+    enabled: yes
+    state: started
+  become: true
+  failed_when: false
+  when: enable_nvidia | default(true)
+  tags: ['services', 'nvidia']

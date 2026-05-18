@@ -1,0 +1,11 @@
+---
+- name: Load package variables
+  include_vars: packages.yml
+  tags: ['network']
+
+- name: Install networking packages
+  dnf:
+    name: "{{ networking_packages }}"
+    state: present
+  become: true
+  tags: ['network']

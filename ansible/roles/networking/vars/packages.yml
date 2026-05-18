@@ -1,0 +1,7 @@
+---
+networking_packages:
+  - tailscale
+  - cloudflare-warp
+  - openvpn
+  - wireguard-tools
+  - openssh-server

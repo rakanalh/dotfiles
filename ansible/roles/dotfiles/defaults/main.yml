@@ -1,0 +1,5 @@
+---
+# Default variables for dotfiles role
+
+# Dotfiles directory (override in group_vars if needed)
+dotfiles_dir: "{{ lookup('env', 'HOME') }}/.dotfiles"

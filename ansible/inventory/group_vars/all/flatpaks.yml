@@ -1,0 +1,35 @@
+---
+# Flatpak application definitions
+
+# Flathub remote URL
+flathub_remote: https://flathub.org/repo/flathub.flatpakrepo
+
+# Flatpak applications to install
+flatpak_apps:
+  - name: Discord
+    id: com.discordapp.Discord
+    category: communication
+
+  - name: Slack
+    id: com.slack.Slack
+    category: communication
+
+  - name: Visual Studio Code
+    id: com.visualstudio.code
+    category: development
+
+  - name: Obsidian
+    id: md.obsidian.Obsidian
+    category: productivity
+
+  - name: OpenRA
+    id: net.openra.OpenRA
+    category: gaming
+
+  - name: Ferdium
+    id: org.ferdium.Ferdium
+    category: communication
+
+  - name: Zoom
+    id: us.zoom.Zoom
+    category: communication

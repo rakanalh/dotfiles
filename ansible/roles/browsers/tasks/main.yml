@@ -1,0 +1,11 @@
+---
+- name: Load package variables
+  include_vars: packages.yml
+  tags: ['browsers']
+
+- name: Install browser packages
+  dnf:
+    name: "{{ browsers_packages }}"
+    state: present
+  become: true
+  tags: ['browsers']

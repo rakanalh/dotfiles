@@ -1,0 +1,8 @@
+---
+development_enabled: true
+
+dev_rust_enabled: true
+dev_python_enabled: true
+dev_nodejs_enabled: true
+dev_cpp_enabled: true
+dev_containers_enabled: true

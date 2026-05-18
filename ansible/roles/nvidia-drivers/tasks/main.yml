@@ -1,0 +1,99 @@
+---
+- name: Detect NVIDIA GPU
+  shell: lspci | grep -i nvidia | grep -i vga
+  register: nvidia_check
+  ignore_errors: true
+  changed_when: false
+  tags: ['nvidia']
+
+- name: Set NVIDIA detection fact
+  set_fact:
+    has_nvidia_gpu: "{{ nvidia_check.rc == 0 }}"
+  tags: ['nvidia']
+
+- name: Display NVIDIA detection result
+  debug:
+    msg: "NVIDIA GPU {{ 'detected' if has_nvidia_gpu else 'not detected - skipping NVIDIA driver installation' }}"
+  tags: ['nvidia']
+
+- name: Skip NVIDIA role if no GPU found
+  meta: end_host
+  when: not has_nvidia_gpu
+  tags: ['nvidia']
+
+- name: Install kernel development packages
+  dnf:
+    name:
+      - kernel-devel
+      - kernel-headers
+      - gcc
+      - make
+      - dkms
+      - akmods
+    state: present
+  become: true
+  tags: ['nvidia']
+
+- name: Install NVIDIA driver packages
+  dnf:
+    name:
+      - akmod-nvidia
+      - xorg-x11-drv-nvidia
+      - xorg-x11-drv-nvidia-cuda
+      - xorg-x11-drv-nvidia-cuda-libs
+      - nvidia-settings
+      - nvidia-persistenced
+    state: present
+  become: true
+  register: nvidia_installed
+  tags: ['nvidia']
+
+- name: Wait for akmod build to complete
+  shell: |
+    timeout 600 bash -c 'while ! modinfo -F version nvidia &>/dev/null; do
+      echo "Waiting for akmods to build nvidia kernel module..."
+      sleep 10
+    done'
+  when: nvidia_installed.changed
+  become: true
+  tags: ['nvidia']
+
+- name: Add current kernel to akmods
+  command: "akmods --kernels $(uname -r)"
+  when: nvidia_installed.changed
+  become: true
+  tags: ['nvidia']
+
+- name: Create modprobe configuration for nvidia
+  copy:
+    content: |
+      blacklist nouveau
+      options nouveau modeset=0
+    dest: /etc/modprobe.d/blacklist-nouveau.conf
+    mode: '0644'
+  become: true
+  tags: ['nvidia']
+
+- name: Update initramfs
+  command: dracut --force
+  when: nvidia_installed.changed
+  become: true
+  tags: ['nvidia']
+
+- name: Create reboot required flag
+  file:
+    path: /var/run/reboot-required
+    state: touch
+  when: nvidia_installed.changed
+  become: true
+  tags: ['nvidia']
+
+- name: Display NVIDIA installation summary
+  debug:
+    msg: |
+      NVIDIA drivers installed successfully!
+
+      Status: {{ 'Installed' if nvidia_installed.changed else 'Already installed' }}
+
+      {{ '⚠️  REBOOT REQUIRED to load NVIDIA drivers' if nvidia_installed.changed else 'Drivers already loaded' }}
+  tags: ['nvidia']

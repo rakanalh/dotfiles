@@ -1,0 +1,16 @@
+---
+- name: Load package variables
+  include_vars: packages.yml
+  tags: ['fonts']
+
+- name: Install font packages
+  dnf:
+    name: "{{ fonts_packages }}"
+    state: present
+  become: true
+  tags: ['fonts']
+
+- name: Rebuild font cache
+  command: fc-cache -fv
+  become: true
+  tags: ['fonts']

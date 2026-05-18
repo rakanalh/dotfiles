@@ -1,0 +1,10 @@
+---
+editors_packages:
+  - neovim
+  - emacs
+  - code-insiders
+  - vim-enhanced
+
+editors_dependencies:
+  - luajit
+  - luajit-devel

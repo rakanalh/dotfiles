@@ -1,0 +1,6 @@
+---
+virtualization_packages:
+  - qemu-kvm
+  - libvirt
+  - virt-manager
+  - virt-install

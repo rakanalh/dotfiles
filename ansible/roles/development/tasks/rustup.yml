@@ -1,0 +1,57 @@
+---
+- name: Check if rustup is installed
+  command: which rustup
+  register: rustup_check
+  changed_when: false
+  failed_when: false
+  become: false
+  tags: ['dev', 'rust']
+
+- name: Download rustup installer
+  get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp/rustup-init.sh
+    mode: '0755'
+  when: rustup_check.rc != 0
+  become: false
+  tags: ['dev', 'rust']
+
+- name: Install rustup
+  command: /tmp/rustup-init.sh -y --default-toolchain stable
+  when: rustup_check.rc != 0
+  become: false
+  tags: ['dev', 'rust']
+
+- name: Remove rustup installer
+  file:
+    path: /tmp/rustup-init.sh
+    state: absent
+  when: rustup_check.rc != 0
+  tags: ['dev', 'rust']
+
+- name: Ensure rust toolchain is up to date
+  command: ~/.cargo/bin/rustup update stable
+  register: rustup_update
+  changed_when: "'updated' in rustup_update.stdout"
+  become: false
+  tags: ['dev', 'rust']
+
+- name: Install rust-analyzer
+  command: ~/.cargo/bin/rustup component add rust-analyzer
+  register: rust_analyzer_install
+  changed_when: "'installing component' in rust_analyzer_install.stdout"
+  failed_when: false
+  become: false
+  tags: ['dev', 'rust']
+
+- name: Verify rustc installation
+  command: ~/.cargo/bin/rustc --version
+  register: rustc_version
+  changed_when: false
+  become: false
+  tags: ['dev', 'rust']
+
+- name: Display Rust version
+  debug:
+    msg: "{{ rustc_version.stdout }}"
+  tags: ['dev', 'rust']

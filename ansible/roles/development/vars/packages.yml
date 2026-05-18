@@ -1,0 +1,82 @@
+---
+# Python stacks
+dev_python_packages:
+  - python3
+  - python3-pip
+  - python3-devel
+  - python3-virtualenv
+  - python3-setuptools
+  - python3.11
+  - python3.11-devel
+  - python3.12
+  - python3.12-devel
+  - pipx
+
+# Node.js
+dev_nodejs_packages:
+  - nodejs
+  - nodejs-npm
+  - nodejs-docs
+
+# C/C++ toolchains
+dev_cpp_packages:
+  - gcc
+  - gcc-c++
+  - clang
+  - clang-tools-extra
+  - llvm
+  - llvm-devel
+  - cmake
+  - ninja-build
+  - meson
+  - ccache
+
+# Build tools
+dev_build_tools:
+  - make
+  - automake
+  - autoconf
+  - pkg-config
+  - gdb
+  - valgrind
+
+# Container tools (Docker)
+dev_containers_packages:
+  - docker-ce
+  - docker-ce-cli
+  - docker-buildx-plugin
+  - docker-compose-plugin
+  - containerd.io
+
+# Container tools (Podman)
+dev_podman_packages:
+  - podman
+  - buildah
+  - skopeo
+
+# Version control
+dev_vcs_packages:
+  - git
+  - git-lfs
+  - gh  # GitHub CLI
+  - tig
+
+# Database clients
+dev_database_packages:
+  - postgresql
+  - postgresql-devel
+  - mariadb
+  - mariadb-devel
+  - sqlite
+  - sqlite-devel
+
+development_packages: >-
+  {{
+    (dev_python_enabled | default(true) | ternary(dev_python_packages, [])) +
+    (dev_nodejs_enabled | default(true) | ternary(dev_nodejs_packages, [])) +
+    (dev_cpp_enabled | default(true) | ternary(dev_cpp_packages, [])) +
+    dev_build_tools +
+    (dev_containers_enabled | default(true) | ternary(dev_containers_packages + dev_podman_packages, [])) +
+    dev_vcs_packages +
+    dev_database_packages
+  }}
