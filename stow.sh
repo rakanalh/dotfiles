@@ -15,6 +15,7 @@ PACKAGES=(
   zellij
   gh
   gtk
+  kde
 )
 
 echo "Stowing dotfiles from: $DOTFILES_DIR"

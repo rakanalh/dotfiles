@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Staged Autostart Orchestrator
+Comment=Launches apps desktop-by-desktop (high→low), waits per window, ends on desktop 1
+Exec=/home/rakan/.local/bin/kde-staged-autostart.sh
+Icon=preferences-desktop-launch-feedback
+Terminal=false
+X-KDE-autostart-phase=2
+X-GNOME-Autostart-enabled=true
