@@ -75,3 +75,9 @@ export PATH="$PATH:/home/rakan/.sp1/bin"
 export PATH="/home/rakan/.local/bin:$PATH"
 
 eval "$(direnv hook bash)"
+
+# Android SDK
+export ANDROID_HOME="$HOME/Android/Sdk"
+export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools"
+
+alias claude-mem='/home/rakan/.bun/bin/bun "/home/rakan/.claude/plugins/cache/thedotmack/claude-mem/10.5.3/scripts/worker-service.cjs"'
